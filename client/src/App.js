@@ -49,7 +49,7 @@ function App() {
           {cookieValue == process.env.REACT_APP_ADMIN_MAIL && <Route path="/login" element={<AdminAccount />} />}
           {(cookieValue != process.env.REACT_APP_ADMIN_MAIL && cookieValue != undefined) && <Route path="/login" element={<MyAccount />} />}
           <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup />}/>
           <Route path="/orders" element={<Orders />} />
           <Route path="/singleorderpage" element={<SingleOrderPage />} />
           <Route path="/cart" element={<Cart />} />

@@ -10,11 +10,11 @@ export default function AllItemPage(props) {
     const [selectedOption, setSelectedOption] = useState('All');
     const [totalPages, setTotalPages] = useState(0)
     const [pageNum, setPageNum] = useState(1)
-    const [count, setCount] = useState(1)
-    setInterval(() => {
-        setCount(count+1)
+    // const [count, setCount] = useState(1)
+    // setInterval(() => {
+    //     setCount(count+1)
         
-    }, 2000);
+    // }, 2000);
 
 
     const typeChange = (event) => {
@@ -38,11 +38,11 @@ export default function AllItemPage(props) {
                 .then(res => {
                     toast.success('why')
                     setProgress(50)
-                    setData(res.data)
-                    setTotalPages(12)
-                    // const x = res.data
-                    // setData(x.allProducts)
-                    // setTotalPages(Math.ceil((x.totalItems) / 12))
+                    // setData(res.data)
+                    // setTotalPages(12)
+                    const x = res.data
+                    setData(x.allProducts)
+                    setTotalPages(Math.ceil((x.totalItems) / 12))
                     setPageNum(1)
                     setProgress(100)
                 })
@@ -131,7 +131,7 @@ export default function AllItemPage(props) {
                 <option >Kitchen</option>
             </select>
 
-            <h1>count is {count}</h1>
+            {/* <h1>count is {count}</h1> */}
 
 
             <section className="text-gray-600 body-font ">

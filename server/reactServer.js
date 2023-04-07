@@ -123,7 +123,7 @@ app.post("/getProducts", async (req, res) => {
                 allProducts,
                 totalItems
             }
-            setTimeout(()=>{
+             setTimeout(()=>{
                 res.json(data)
 
             },5000)
