@@ -108,10 +108,10 @@ app.post("/getProducts", async (req, res) => {
                 allProducts,
                 totalItems
             }
-            setTimeout(()=>{
-                res.json(data)
+            // setTimeout(()=>{
+                res.json(type)
 
-            },5000)
+            // },5000)
 
             // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
         }
