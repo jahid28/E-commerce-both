@@ -1,6 +1,6 @@
+require("dotenv").config()
 const mongoose=require("mongoose")
-
-mongoose.connect("mongodb://0.0.0.0:27017/mern_ecommerce")
+mongoose.connect(`${process.env.MY_DATABASE_URL}`)
     // .then(() => {
     //     console.log("react mongodb connected");
     // })

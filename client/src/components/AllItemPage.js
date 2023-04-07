@@ -31,19 +31,12 @@ export default function AllItemPage(props) {
                 selectedOption
             })
                 .then(res => {
-                    // setProgress(50)
-                    // const x = res.data
-                    // setData(x.allProducts)
-                    // setTotalPages(Math.ceil((x.totalItems) / 12))
-                    // setPageNum(1)
-                    // setProgress(100)
-                    if(res.data="fail"){
-                        toast.success("failed")
-                    }
-                    else{
-                        toast.success("ww")
-                    }
-
+                    setProgress(50)
+                    const x = res.data
+                    setData(x.allProducts)
+                    setTotalPages(Math.ceil((x.totalItems) / 12))
+                    setPageNum(1)
+                    setProgress(100)
                 })
                 .catch(e => {
                     toast.error("Somethig went wrong!");

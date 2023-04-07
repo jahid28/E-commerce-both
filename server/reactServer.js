@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 // import cors from 'cors'
 // import bcryptjs from 'bcryptjs'
 // import express from 'express';
@@ -6,6 +8,7 @@
 // import { userCollection, productCollection, cartCollection, orderCollection } from "./mongo.js"
 // import dotenv from 'dotenv/config';
 // import path from 'path'
+
 const cors = require("cors")
 const bcryptjs = require("bcryptjs")
 const express = require("express")
@@ -236,13 +239,11 @@ app.post("/search", async (req, res) => {
 //             finalArr,
 //             totalItems
 //         }
-//         console.log(obj)
 //         res.json(obj)
 
 //     }
 //     catch (e) {
 //         res.json("fail")
-//         console.log(e)
 //     }
 // })
 
@@ -346,7 +347,7 @@ app.post("/getItemsFromcart", async (req, res) => {
             }
             else {
                 let arr = []
-                check.allProducts.map(async (e) => {
+                Promise.all(check.allProducts.map(async (e) => {
                     const checkInProducts = await productCollection.findOne({ name: e.nameOfProduct })
                     let SingleItemPageObj = checkInProducts
                     let qty
@@ -365,11 +366,17 @@ app.post("/getItemsFromcart", async (req, res) => {
                     arr.push({ SingleItemPageObj, qty })
 
 
-                })
-
-                setTimeout(() => {
+                }))
+                .then(() => {
                     res.json(arr)
-                }, 200)
+                  })
+                  .catch((error) => {
+                    res.json("fail")
+                  });
+
+                // setTimeout(() => {
+                //     res.json(arr)
+                // }, 200)
 
 
             }
@@ -401,7 +408,7 @@ app.post("/deleteItemFromCart", async (req, res) => {
 
 
         let newArr = []
-        arr.map(async (e) => {
+        Promise.all(arr.map(async (e) => {
             const checkInProducts = await productCollection.findOne({ name: e.nameOfProduct })
             let SingleItemPageObj = checkInProducts
             let qty = e.qty
@@ -410,11 +417,17 @@ app.post("/deleteItemFromCart", async (req, res) => {
             newArr.push({ SingleItemPageObj, qty })
 
 
-        })
-
-        setTimeout(() => {
+        }))
+        .then(() => {
             res.json(newArr)
-        }, 200)
+          })
+          .catch((error) => {
+            res.json("fail")
+          });
+
+        // setTimeout(() => {
+        //     res.json(newArr)
+        // }, 200)
 
 
     }
@@ -442,7 +455,7 @@ app.post("/qtyChanged", async (req, res) => {
 
         let arr = []
 
-        check.allProducts.map(async (e) => {
+        Promise.all(check.allProducts.map(async (e) => {
             const checkInProducts = await productCollection.findOne({ name: e.nameOfProduct })
             let SingleItemPageObj = checkInProducts
             let qty = e.qty
@@ -451,11 +464,17 @@ app.post("/qtyChanged", async (req, res) => {
             arr.push({ SingleItemPageObj, qty })
 
 
-        })
-
-        setTimeout(() => {
+        }))
+        .then(() => {
             res.json(arr)
-        }, 200)
+          })
+          .catch((error) => {
+            res.json("fail")
+          });
+
+        // setTimeout(() => {
+        //     res.json(arr)
+        // }, 200)
 
 
     }
@@ -617,8 +636,8 @@ app.post("/getItemsFromOrderCollection", async (req, res) => {
         if (check.length != 0) {
 
             let arr = []
-
-            check.map(async (e) => {
+            
+              Promise.all(check.map(async (e) => {
                 const checkInProducts = await productCollection.findOne({ name: e.nameOfProduct })
                 let SingleItemPageObj = checkInProducts
                 let qty = e.qty
@@ -629,16 +648,17 @@ app.post("/getItemsFromOrderCollection", async (req, res) => {
                 let pincode = e.pincode
                 let cardNum = e.cardNum
 
-
-                // arr.push({ SingleItemPageObj, date, time })
                 arr.push({ SingleItemPageObj, qty, date, time, phoneNum, address, pincode, cardNum })
 
 
-            })
-
-            setTimeout(() => {
+            })) .then(() => {
                 res.json(arr)
-            }, 200)
+              })
+              .catch((error) => {
+                res.json("fail")
+              });
+
+            
 
 
 

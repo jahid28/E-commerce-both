@@ -30,7 +30,7 @@ export default function Address() {
     }, [])
 
     async function getApi() {
-        const response = await fetch(`https://api.postalpincode.in/pincode/${formData.pincode}`);
+        const response = await fetch(`${process.env.REACT_APP_PINCODE_API}${formData.pincode}`);
         const data = await response.json();
         if (data[0].PostOffice != null) {
             setState(data[0].PostOffice[0].Circle)
