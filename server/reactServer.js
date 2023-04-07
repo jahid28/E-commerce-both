@@ -108,8 +108,12 @@ app.post("/getProducts", async (req, res) => {
                 allProducts,
                 totalItems
             }
+            setTimeout(()=>{
+                res.json(data)
 
-            res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
+            },5000)
+
+            // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
         }
         else {
 
@@ -119,8 +123,12 @@ app.post("/getProducts", async (req, res) => {
                 allProducts,
                 totalItems
             }
+            setTimeout(()=>{
+                res.json(data)
 
-            res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
+            },5000)
+
+            // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
         }
 
 
