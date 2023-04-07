@@ -13,20 +13,21 @@ const cors = require("cors")
 const bcryptjs = require("bcryptjs")
 const express = require("express")
 const nodemailer = require("nodemailer")
+const path = require("path")
 const { userCollection, productCollection, cartCollection, orderCollection } = require("./mongo")
 
-const PORT = process.env.PORT || 8000
+// const PORT = process.env.PORT || 8000
 // const BASE_URL=process.env.BASE_URL
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-// app.use(express.static(path.join(__dirname,'../client/build')))
+app.use(express.static(path.join(__dirname,'../client/build')))
 
-// app.get("*",function(res,req){
-//     res.sendFile("../client/build/index.html")
-// })
+app.get("*",function(res,req){
+    res.sendFile("../client/build/index.html")
+})
 
 async function hashPass(password) {
 
@@ -801,4 +802,4 @@ app.post("/signup", async (req, res) => {
 //     console.log('Server listening on port');
 // });
 
-app.listen(PORT);
+app.listen(process.env.MY_PORT);
