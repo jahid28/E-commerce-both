@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/index'
+import { actionCreators } from '../state/index.js'
 export default function Orders() {
   const [progress, setProgress] = useState(0)
   const [data, setData] = useState([])
@@ -26,7 +26,7 @@ export default function Orders() {
     try {
       setProgress(50)
 
-      await axios.post("http://localhost:8000/getItemsFromOrderCollection", {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/getItemsFromOrderCollection`, {
         cookieVal
       })
         .then(res => {
@@ -45,7 +45,6 @@ export default function Orders() {
         })
         .catch(e => {
           toast.error("Somethig went wrong!");
-          console.log("error ", e);
         })
     }
 
@@ -53,7 +52,6 @@ export default function Orders() {
     catch (e) {
       toast.error("Somethig went wrong!");
 
-      console.log(e);
 
     }
     setProgress(100)
@@ -84,7 +82,7 @@ export default function Orders() {
     try {
       setProgress(50)
 
-      await axios.post("http://localhost:8000/submitReview", {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/submitReview`, {
         cookieVal, review, productName
       })
         .then(res => {
@@ -110,7 +108,6 @@ export default function Orders() {
     catch (e) {
       toast.error("Somethig went wrong!");
 
-      console.log(e);
 
     }
     setProgress(100)
@@ -124,7 +121,7 @@ export default function Orders() {
     try {
       setProgress(50)
 
-      await axios.post("http://localhost:8000/submitRating", {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/submitRating`, {
         cookieVal, selectedOption, productName
       })
         .then(res => {
@@ -151,7 +148,6 @@ export default function Orders() {
     catch (e) {
       toast.error("Somethig went wrong!");
 
-      console.log(e);
 
     }
     setProgress(100)

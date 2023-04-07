@@ -67,7 +67,7 @@ export default function Signup() {
       }
       else {
 
-        await axios.post("http://localhost:8000/signup", {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/signup`, {
           formData
         })
           .then(res => {
@@ -94,13 +94,12 @@ export default function Signup() {
           })
           .catch(e => {
             toast.error("Somethig went wrong!");
-            console.log("error ", e);
           })
-      }
-
+        }
+        
     }
     catch (e) {
-      console.log(e);
+        toast.error("Somethig went wrong!");
 
     }
 

@@ -43,7 +43,7 @@ export default function ForgotPassword() {
 
         setProgress(50)
 
-        await axios.post("http://localhost:8000/sendEmail", { email, OTP })
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/sendEmail`, { email, OTP })
           .then(res => {
             if (res.data == 'pass') {
               toast.success("Code sent to the email")
@@ -59,13 +59,13 @@ export default function ForgotPassword() {
           .catch(e => {
             toast.error("Something went wrong")
           })
-        setProgress(70)
+          setProgress(70)
+        }
       }
-    }
 
-
-    catch (e) {
-      console.log(e);
+      
+      catch (e) {
+      toast.error("Something went wrong")
 
     }
     setProgress(100)

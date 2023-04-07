@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/index'
+import { actionCreators } from '../state/index.js'
 
 export default function SingleItemPage(props) {
     // const navigate = useNavigate()
@@ -44,7 +44,7 @@ export default function SingleItemPage(props) {
     //             setProgress(70)
     //         }
     //         else {
-    //             await axios.post("http://localhost:8000/addToCart", {
+    //             await axios.post("${process.env.REACT_APP_SERVER_URL}/addToCart", {
     //                 cookieVal, nameOfProduct, qty
     //             })
     //                 .then(res => {
@@ -62,7 +62,6 @@ export default function SingleItemPage(props) {
     //                 })
     //                 .catch(e => {
     //                     toast.error("Somethig went wrong!");
-    //                     console.log("error ", e);
     //                 })
     //         }
     //     }
@@ -71,7 +70,6 @@ export default function SingleItemPage(props) {
     //     catch (e) {
     //         toast.error("Somethig went wrong!");
 
-    //         console.log(e);
 
     //     }
     //     setProgress(100)

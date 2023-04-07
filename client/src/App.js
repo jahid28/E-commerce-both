@@ -1,5 +1,3 @@
-// import dotenv from 'dotenv';
-// dotenv.config();
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import Home from './components/Home.js';
@@ -8,7 +6,7 @@ import Signup from './components/Signup.js';
 import Navbar from './components/Navbar.js';
 import Orders from './components/Orders.js';
 import Cart from './components/Cart.js';
-import Footer from './components/Footer';
+import Footer from './components/Footer.js';
 import AdminAccount from "./components/AdminAccount.js";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,16 +23,9 @@ import Address from "./components/Address.js";
 import Payment from "./components/Payment.js";
 import PaymentWrapper from "./components/PaymentWrapper.js";
 import ResetPassword from "./components/ResetPassword.js";
-// import dotenv from 'dotenv/config';
-// import ReactImageMagnify from 'react-image-magnify';
-// import tw from 'tailwind-styled-components';
-// import ImageMagnify from 'react-image-magnify';
-// import ReactMagnify from "./components/ReactMagnify.js";
-// // import 'react-image-magnify/dist/styles.css';
-import { QrReader } from 'react-qr-reader';
+
 
 function App() {
-
   const [cookieValue, setCookieValue] = useState(Cookies.get('email'));
 
   useEffect(() => {
@@ -47,24 +38,9 @@ function App() {
     return () => clearInterval(interval);
   }, [cookieValue]);
   
-  // const [scanResult, setScanResult] = useState(null);
-
-  // const handleScan = (data) => {
-  //   if (data) {
-  //     setScanResult(data);
-  //   }
-  // };
-
-  // const handleError = (err) => {
-  //   console.error(err);
-  // };
   return (
     <div className="App ">
       <ToastContainer />
-
-{/* <ReactMagnify/> */}
-
-{/* <p className="bg"></p> */}
 
       <Router>
         <Navbar />

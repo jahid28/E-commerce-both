@@ -6,7 +6,7 @@ import LoadingBar from 'react-top-loading-bar'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/index'
+import { actionCreators } from '../state/index.js'
 
 export default function Cart() {
   const navigate = useNavigate()
@@ -27,7 +27,7 @@ export default function Cart() {
     try {
       setProgress(50)
 
-      await axios.post("http://localhost:8000/getItemsFromCart", {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/getItemsFromCart`, {
         cookieVal
       })
         .then(res => {
@@ -46,7 +46,6 @@ export default function Cart() {
         })
         .catch(e => {
           toast.error("Somethig went wrong!");
-          console.log("error ", e);
         })
       // }
     }
@@ -55,7 +54,6 @@ export default function Cart() {
     catch (e) {
       toast.error("Somethig went wrong!");
 
-      console.log(e);
 
     }
     setProgress(100)
@@ -70,7 +68,7 @@ export default function Cart() {
     try {
       setProgress(50)
 
-      await axios.post("http://localhost:8000/deleteItemFromCart", {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/deleteItemFromCart`, {
         cookieVal, deleteItem
       })
         .then(res => {
@@ -79,7 +77,6 @@ export default function Cart() {
         })
         .catch(e => {
           toast.error("Somethig went wrong!");
-          console.log("error ", e);
         })
 
     }
@@ -87,7 +84,6 @@ export default function Cart() {
 
     catch (e) {
       toast.error("Somethig went wrong!");
-      console.log(e);
 
     }
     setProgress(100)
@@ -103,7 +99,7 @@ export default function Cart() {
 
     try {
 
-      await axios.post("http://localhost:8000/qtyChanged", {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/qtyChanged`, {
         cookieVal, qty, itemName
       })
         .then(res => {
@@ -112,12 +108,10 @@ export default function Cart() {
         })
         .catch(e => {
           toast.error("Somethig went wrong!");
-          console.log("error ", e);
         })
     }
     catch (e) {
       toast.error("Somethig went wrong!");
-      console.log(e);
 
     }
     setProgress(100)

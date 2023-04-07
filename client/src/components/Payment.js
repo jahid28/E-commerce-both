@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { ToastContainer, toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar'
-import SmallCartPreview from './SmallCartPreview';
+import SmallCartPreview from './SmallCartPreview.js';
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/index'
+import { actionCreators } from '../state/index.js'
 import Cookies from 'js-cookie';
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +42,6 @@ const PaymentForm = () => {
                 toast.error(result.error.message)
             }
             else {
-                // console.log("num is ",result.paymentMethod.card.last4)
                 if (counter.SmallCartPreviewTotal == 0) {
                     toast.error("Nothing to order")
                     setProgress(100)
@@ -69,7 +68,7 @@ const PaymentForm = () => {
                 setProgress(70)
 
 
-                await axios.post("http://localhost:8000/addToOrders", {
+                await axios.post(`${process.env.REACT_APP_SERVER_URL}/addToOrders`, {
                     cookieVal, arr, isProductFromCart
                 })
                     .then(res => {
@@ -89,13 +88,11 @@ const PaymentForm = () => {
                     })
                     .catch(e => {
                         toast.error("Somethig went wrong!");
-                        console.log("error ", e);
                     })
             }
         }
         catch (e) {
             toast.error("Something went wrong!")
-            console.log(e)
         }
         setProgress(100)
     };

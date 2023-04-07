@@ -1,12 +1,12 @@
-import mongoose from 'mongoose';
+const mongoose=require("mongoose")
 
 mongoose.connect("mongodb://0.0.0.0:27017/mern_ecommerce")
-    .then(() => {
-        console.log("react mongodb connected");
-    })
-    .catch(() => {
-        console.log('failed');
-    })
+    // .then(() => {
+    //     console.log("react mongodb connected");
+    // })
+    // .catch(() => {
+    //     console.log('failed');
+    // })
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -111,4 +111,12 @@ const cartCollection = mongoose.model("cartCollection", cartSchema)
 const orderCollection = mongoose.model("orderCollection", orderSchema)
 
 
-export { userCollection, productCollection, cartCollection,orderCollection };
+// export { userCollection, productCollection, cartCollection,orderCollection };
+const collections = {
+    userCollection,
+    productCollection,
+    cartCollection,
+    orderCollection,
+  };
+  
+  module.exports = collections;

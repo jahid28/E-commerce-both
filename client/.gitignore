@@ -4,13 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
-/package-lock.json
 /.env
 # testing
 /coverage
 
 # production
-/build
+# /build
 
 # misc
 .DS_Store

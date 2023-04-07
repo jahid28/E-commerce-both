@@ -4,8 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/index'
-import SmallCartPreview from './SmallCartPreview';
+import { actionCreators } from '../state/index.js'
+import SmallCartPreview from './SmallCartPreview.js';
 
 export default function Address() {
     const navigate = useNavigate()

@@ -35,7 +35,7 @@ export default function AdminAccount() {
 
 
       try {
-        await axios.post("http://localhost:8000/adminUpdate", {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/adminUpdate`, {
           formData, messages
 
         })
@@ -49,13 +49,12 @@ export default function AdminAccount() {
           })
           .catch(e => {
             toast.error("Something went wrong carch!");
-
-            console.log(e);
+            
           })
-
-      }
-      catch (e) {
-        console.log(e);
+          
+        }
+        catch (e) {
+        toast.error("Something went wrong carch!");
 
       }
       setFormData({ name: '', price: '', stocks: '', type: '' }); // clear form fields

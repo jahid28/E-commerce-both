@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/index'
+import { actionCreators } from '../state/index.js'
 // import { QrReader } from 'react-qr-reader';
 
 export default function Navbar() {
@@ -35,12 +35,11 @@ export default function Navbar() {
 
 
 
-        await axios.post("http://localhost:8000/search", {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
           query
         })
           .then(res => {
             // let finalArr = res.data
-            console.log("hi ", res.data)
             searchQuery(res.data)
             setProgress(70)
             navigate("/searchpage")
@@ -48,7 +47,6 @@ export default function Navbar() {
           .catch(e => {
             toast.error("Something went wrong!");
 
-            console.log(e);
           })
       }
 
@@ -56,7 +54,6 @@ export default function Navbar() {
     }
     catch (e) {
       toast.error("Something went wrong!");
-      console.log(e);
 
     }
 
@@ -100,7 +97,6 @@ export default function Navbar() {
     setMicState(true)
     recognition.start(); // start the recognition process
     setTimeout(() => {
-      // console.log(query)
       recognition.stop(); // stop the recognition process after 3 seconds
 
       setMicState(false)
@@ -111,7 +107,7 @@ export default function Navbar() {
       let query = event.results[0][0].transcript;
 
       setQuery(query)
-      await axios.post("http://localhost:8000/search", {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
         query
       })
         .then(res => {
@@ -124,7 +120,6 @@ export default function Navbar() {
         .catch(e => {
           toast.error("Something went wrong!");
 
-          console.log(e);
         })
       setProgress(100)
 
@@ -141,14 +136,12 @@ export default function Navbar() {
     // };
 
     // const handleError = (err) => {
-    //   console.error(err);
     // };
     // function handleError(){
 
     // }
 
     // const clicked=()=>{
-    //   console.log('lll')
     // }
   }
 
@@ -161,7 +154,6 @@ export default function Navbar() {
   // };
 
   // const handleError = (err) => {
-  //   console.error(err);
   // };
 
   return (

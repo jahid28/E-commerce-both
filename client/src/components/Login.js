@@ -25,7 +25,7 @@ export default function Login() {
 
       }
       else {
-        await axios.post("http://localhost:8000/login", {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, {
           formData
         })
           .then(res => {
@@ -48,14 +48,13 @@ export default function Login() {
           })
           .catch(e => {
             toast.error("Somethig went wrong!");
-            console.log("error ", e);
           })
+        }
       }
-    }
 
 
     catch (e) {
-      console.log(e);
+      toast.error("Somethig went wrong!");
 
     }
 

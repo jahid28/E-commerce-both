@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Cookies from "js-cookie";
 import axios from 'axios';
-import Stats from './Stats';
+// import Stats from './Stats.js';
 import { Link } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar'
 
@@ -16,7 +16,7 @@ export default function MyAccount() {
 
         try {
 
-            await axios.post("http://localhost:8000/myaccount", {
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/myaccount`, {
                 cookieValue
             })
                 .then(res => {
@@ -25,13 +25,11 @@ export default function MyAccount() {
 
                 })
                 .catch(e => {
-                    console.log("error ", e);
                 })
         }
 
 
         catch (e) {
-            console.log(e);
 
         }
 
