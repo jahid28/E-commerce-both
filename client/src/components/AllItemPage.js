@@ -17,6 +17,13 @@ export default function AllItemPage(props) {
     // }, 2000);
 
 
+const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
+
+    toast.success(process.env.REACT_APP_SERVER_URL)
+    toast.info(URL)
+
+
+
     const typeChange = (event) => {
         event.preventDefault()
 
@@ -32,7 +39,7 @@ export default function AllItemPage(props) {
 
         try {
 
-            await axios.post(`${process.env.REACT_APP_SERVER_URL}/getProducts`, {
+            await axios.post(`${URL}/getProducts`, {
                 selectedOption
             })
                 .then(res => {
