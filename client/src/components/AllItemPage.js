@@ -31,10 +31,13 @@ export default function AllItemPage(props) {
                 selectedOption
             })
                 .then(res => {
+                    toast.success('why')
                     setProgress(50)
-                    const x = res.data
-                    setData(x.allProducts)
-                    setTotalPages(Math.ceil((x.totalItems) / 12))
+                    setData(res.data)
+                    setTotalPages(12)
+                    // const x = res.data
+                    // setData(x.allProducts)
+                    // setTotalPages(Math.ceil((x.totalItems) / 12))
                     setPageNum(1)
                     setProgress(100)
                 })
