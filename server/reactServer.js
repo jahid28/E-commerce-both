@@ -41,7 +41,8 @@ async function compare(userPass, hashPass) {
 
 
 app.get("/", cors(), (req, res) => {
-    res.redirect('/orders');
+    // res.redirect('/orders');
+    res.send("hello from backend")
 
 })
 
