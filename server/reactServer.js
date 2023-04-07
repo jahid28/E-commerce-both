@@ -13,10 +13,10 @@ const cors = require("cors")
 const bcryptjs = require("bcryptjs")
 const express = require("express")
 const nodemailer = require("nodemailer")
-const path = require("path")
+// const path = require("path")
 const { userCollection, productCollection, cartCollection, orderCollection } = require("./mongo")
 
-// const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8000
 // const BASE_URL=process.env.BASE_URL
 
 const app = express();
@@ -95,13 +95,13 @@ app.post("/pageChange", async (req, res) => {
 
 app.post("/getProducts", async (req, res) => {
     try {
-        const type = req.body.selectedOption
+        // const type = req.body.selectedOption
         // await productCollection.updateMany()
         // await productCollection.updateMany({}, {$set: {allRatings:[],reviews:[]}})
         // await productCollection.updateMany({}, { $unset: { numOfRatings: 1 } })
 
 
-        if (type == "All") {
+        // if (type == "All") {
 
             // const allProducts = await productCollection.find({}).skip(0).limit(12)
             // const totalItems = await productCollection.find({}).countDocuments()
@@ -110,13 +110,13 @@ app.post("/getProducts", async (req, res) => {
             //     totalItems
             // }
             // setTimeout(()=>{
-                res.json('All')
+                res.json('jk')
 
             // },5000)
 
             // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
-        }
-        else {
+        // }
+        // else {
 
             // const allProducts = await productCollection.find({ type: type }).skip(0).limit(12)
             // const totalItems = await productCollection.find({ type: type }).countDocuments()
@@ -125,12 +125,12 @@ app.post("/getProducts", async (req, res) => {
             //     totalItems
             // }
             //  setTimeout(()=>{
-                res.json('other')
+                // res.json('other')
 
             // },5000)
 
             // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
-        }
+        // }
 
 
     }
@@ -802,4 +802,4 @@ app.post("/signup", async (req, res) => {
 //     console.log('Server listening on port');
 // });
 
-app.listen(process.env.MY_PORT);
+app.listen(PORT);

@@ -20,7 +20,7 @@ export default function AllItemPage(props) {
 const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
 
     toast.success(process.env.REACT_APP_SERVER_URL)
-    toast.info(URL)
+    toast.info(selectedOption)
 
 
 
@@ -50,12 +50,10 @@ const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
                     // setTotalPages(Math.ceil((x.totalItems) / 12))
                     // setPageNum(1)
                     // setProgress(100)
-                    if(res.data=="All"){
-                        toast.success('All')
+                    if(res.data=="jk"){
+                        toast.success('jk')
                     }
-                    else if(res.data=="other"){
-                        toast.success('other')
-                    }
+                    
                     else{
                         toast.success('nothing')
                     }
