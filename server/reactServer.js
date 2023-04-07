@@ -102,14 +102,14 @@ app.post("/getProducts", async (req, res) => {
 
         if (type == "All") {
 
-            const allProducts = await productCollection.find({}).skip(0).limit(12)
-            const totalItems = await productCollection.find({}).countDocuments()
-            const data = {
-                allProducts,
-                totalItems
-            }
+            // const allProducts = await productCollection.find({}).skip(0).limit(12)
+            // const totalItems = await productCollection.find({}).countDocuments()
+            // const data = {
+            //     allProducts,
+            //     totalItems
+            // }
             // setTimeout(()=>{
-                res.json(type)
+                res.json('All')
 
             // },5000)
 
@@ -117,16 +117,16 @@ app.post("/getProducts", async (req, res) => {
         }
         else {
 
-            const allProducts = await productCollection.find({ type: type }).skip(0).limit(12)
-            const totalItems = await productCollection.find({ type: type }).countDocuments()
-            const data = {
-                allProducts,
-                totalItems
-            }
-             setTimeout(()=>{
-                res.json(data)
+            // const allProducts = await productCollection.find({ type: type }).skip(0).limit(12)
+            // const totalItems = await productCollection.find({ type: type }).countDocuments()
+            // const data = {
+            //     allProducts,
+            //     totalItems
+            // }
+            //  setTimeout(()=>{
+                res.json('other')
 
-            },5000)
+            // },5000)
 
             // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
         }

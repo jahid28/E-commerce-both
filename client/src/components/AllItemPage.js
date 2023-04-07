@@ -36,15 +36,22 @@ export default function AllItemPage(props) {
                 selectedOption
             })
                 .then(res => {
-                    toast.success('why')
-                    setProgress(50)
-                    toast.success(res.data)
+                    // setProgress(50)
                     // setTotalPages(12)
                     // const x = res.data
                     // setData(x.allProducts)
                     // setTotalPages(Math.ceil((x.totalItems) / 12))
-                    setPageNum(1)
-                    setProgress(100)
+                    // setPageNum(1)
+                    // setProgress(100)
+                    if(res.data=="All"){
+                        toast.success('All')
+                    }
+                    else if(res.data=="other"){
+                        toast.success('other')
+                    }
+                    else{
+                        toast.success('nothing')
+                    }
                 })
                 .catch(e => {
                     toast.error("Somethig went wrong!");
