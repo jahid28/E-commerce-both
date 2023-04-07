@@ -94,7 +94,7 @@ app.post("/getProducts", async (req, res) => {
         const type = req.body.selectedOption
         // await productCollection.updateMany()
         // await productCollection.updateMany({}, {$set: {allRatings:[],reviews:[]}})
-        await productCollection.updateMany({}, { $unset: { numOfRatings: 1 } })
+        // await productCollection.updateMany({}, { $unset: { numOfRatings: 1 } })
 
 
         if (type == "All") {

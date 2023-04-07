@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "node reactServer.js",
-    "build": "npm i"
+    "build": "npm i",
+    "dev":"nodemon reactServer.js"
   }
 }
