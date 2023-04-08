@@ -1,5 +1,4 @@
-// require("dotenv").config()
-
+require("dotenv").config()
 // import cors from 'cors'
 // import bcryptjs from 'bcryptjs'
 // import express from 'express';
@@ -13,21 +12,15 @@ const cors = require("cors")
 const bcryptjs = require("bcryptjs")
 const express = require("express")
 const nodemailer = require("nodemailer")
-// const path = require("path")
 const { userCollection, productCollection, cartCollection, orderCollection } = require("./mongo")
 
 const PORT = process.env.PORT || 8000
-// const BASE_URL=process.env.BASE_URL
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-// app.use(express.static(path.join(__dirname,'../client/build')))
 
-// app.get("*",function(res,req){
-//     res.sendFile("../client/build/index.html")
-// })
 
 async function hashPass(password) {
 
@@ -45,24 +38,9 @@ async function compare(userPass, hashPass) {
 
 
 app.get("/", cors(), (req, res) => {
-    // res.redirect('/orders');
     res.send("hello from backend")
 
 })
-
-
-// let ff
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, '/images')
-//     },
-//     filename: (req, file, cb) => {
-//         // ff = file
-//         cb(null, file.originalname)
-//     } 
-// })
-// const uploading = multer({ storage: storage })
 
 
 app.post("/pageChange", async (req, res) => {
@@ -95,42 +73,33 @@ app.post("/pageChange", async (req, res) => {
 
 app.post("/getProducts", async (req, res) => {
     try {
-        // const type = req.body.selectedOption
-        // await productCollection.updateMany()
-        // await productCollection.updateMany({}, {$set: {allRatings:[],reviews:[]}})
-        // await productCollection.updateMany({}, { $unset: { numOfRatings: 1 } })
 
 
-        // if (type == "All") {
+        if (type == "All") {
 
-            // const allProducts = await productCollection.find({}).skip(0).limit(12)
-            // const totalItems = await productCollection.find({}).countDocuments()
-            // const data = {
-            //     allProducts,
-            //     totalItems
-            // }
-            // setTimeout(()=>{
-                res.json('jk')
+            const allProducts = await productCollection.find({}).skip(0).limit(12)
+            const totalItems = await productCollection.find({}).countDocuments()
+            const data = {
+                allProducts,
+                totalItems
+            }
+            res.json(data)
 
-            // },5000)
 
-            // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
-        // }
-        // else {
 
-            // const allProducts = await productCollection.find({ type: type }).skip(0).limit(12)
-            // const totalItems = await productCollection.find({ type: type }).countDocuments()
-            // const data = {
-            //     allProducts,
-            //     totalItems
-            // }
-            //  setTimeout(()=>{
-                // res.json('other')
+        }
+        else {
 
-            // },5000)
+            const allProducts = await productCollection.find({ type: type }).skip(0).limit(12)
+            const totalItems = await productCollection.find({ type: type }).countDocuments()
+            const data = {
+                allProducts,
+                totalItems
+            }
+            res.json(data)
 
-            // res.json([{name:'jk',type:'oo',price:99,stocks:99,img:[],allRatings:[],reviews:[],_id:'737383783'}])
-        // }
+
+        }
 
 
     }
@@ -159,12 +128,11 @@ app.post("/search", async (req, res) => {
     const searchVal = req.body.query
     const words = searchVal.split(' ');
     let finalArr = []
-    // let totalItems = 0
 
     try {
         const products = await productCollection.find({})
 
-        products.forEach(e => {
+        Promise.all(products.forEach(e => {
             let sum = 0
             for (let i = 0; i < words.length; i++) {
                 const name = e.name;
@@ -185,76 +153,22 @@ app.post("/search", async (req, res) => {
 
                 finalArr.push(e)
 
-                // totalItems++
+
             }
 
+        })).then(() => {
+            res.json(finalArr)
         })
-        //    let obj = {
-        //         finalArr,
-        //         totalItems
-        //     }
+            .catch((error) => {
+                res.json("fail")
+            });
+
         res.json(finalArr)
     }
     catch (e) {
         res.json("fail")
     }
 })
-
-// app.post("/searchPageChange", async (req, res) => {
-
-//     const searchVal = req.body.query
-//     const words = searchVal.split(' ');
-//     
-//     let finalArr = []
-//     let totalItems = 0
-
-//     try {
-//         const products = await productCollection.find({})
-
-//         const query = req.body.query
-//         const pageNum = req.body.pageNum
-//         for (let j = 0; j < products.length; j++) {
-//             let sum = 0
-//             for (let i = 0; i < words.length; i++) {
-//                 // const name = e.name;
-//                 const name = products[j].name;
-//                 const regex = new RegExp(`\\b${words[i].toLowerCase()}\\b`, 'i');
-
-//                 if (regex.test(name.toLowerCase())) {
-
-//                     sum++
-//                 }
-//                 // const match = name.toLowerCase().includes(words[i].toLowerCase());
-//                 // if (match) {
-//                 // }
-
-//             }
-//             // if(finalArr.length>=12){
-//             //     break
-//             // }
-
-
-//             if (sum == words.length) {
-//                 if (finalArr.length < 12) {
-
-//                     finalArr.push(products[j])
-//                 }
-//                 totalItems++
-//             }
-
-//             // })
-//         }
-//         let obj = {
-//             finalArr,
-//             totalItems
-//         }
-//         res.json(obj)
-
-//     }
-//     catch (e) {
-//         res.json("fail")
-//     }
-// })
 
 
 app.post("/adminUpdate", async (req, res) => {
@@ -269,7 +183,6 @@ app.post("/adminUpdate", async (req, res) => {
             price: formData.price,
             stocks: formData.stocks,
             img: messages,
-            // rating:0,
             allRatings: [],
             reviews: []
         }
@@ -376,16 +289,13 @@ app.post("/getItemsFromcart", async (req, res) => {
 
 
                 }))
-                .then(() => {
-                    res.json(arr)
-                  })
-                  .catch((error) => {
-                    res.json("fail")
-                  });
+                    .then(() => {
+                        res.json(arr)
+                    })
+                    .catch((error) => {
+                        res.json("fail")
+                    });
 
-                // setTimeout(() => {
-                //     res.json(arr)
-                // }, 200)
 
 
             }
@@ -421,22 +331,19 @@ app.post("/deleteItemFromCart", async (req, res) => {
             const checkInProducts = await productCollection.findOne({ name: e.nameOfProduct })
             let SingleItemPageObj = checkInProducts
             let qty = e.qty
-            // subTotal=subTotal+ qty*(checkInProducts.price)
 
             newArr.push({ SingleItemPageObj, qty })
 
 
         }))
-        .then(() => {
-            res.json(newArr)
-          })
-          .catch((error) => {
-            res.json("fail")
-          });
+            .then(() => {
+                res.json(newArr)
+            })
+            .catch((error) => {
+                res.json("fail")
+            });
 
-        // setTimeout(() => {
-        //     res.json(newArr)
-        // }, 200)
+
 
 
     }
@@ -468,22 +375,18 @@ app.post("/qtyChanged", async (req, res) => {
             const checkInProducts = await productCollection.findOne({ name: e.nameOfProduct })
             let SingleItemPageObj = checkInProducts
             let qty = e.qty
-            // subTotal=subTotal+ qty*(checkInProducts.price)
 
             arr.push({ SingleItemPageObj, qty })
 
 
         }))
-        .then(() => {
-            res.json(arr)
-          })
-          .catch((error) => {
-            res.json("fail")
-          });
+            .then(() => {
+                res.json(arr)
+            })
+            .catch((error) => {
+                res.json("fail")
+            });
 
-        // setTimeout(() => {
-        //     res.json(arr)
-        // }, 200)
 
 
     }
@@ -507,13 +410,10 @@ app.post("/addToOrders", async (req, res) => {
         allOrders.map(async (item1) => {
             const item2 = product.find((i) => i.name == item1.nameOfProduct);
 
-            // if (item2) {
             if (item2.stocks < item1.qty) {
                 outOfStockSent = true // Set the variable to true if the response has been sent
 
-                // return
             }
-            // }
 
         });
 
@@ -525,9 +425,8 @@ app.post("/addToOrders", async (req, res) => {
             allOrders.map(async (item1) => {
                 const item2 = product.find((i) => i.name == item1.nameOfProduct);
 
-                // if (item2) {
                 await productCollection.updateOne({ name: item1.nameOfProduct }, { $set: { stocks: item2.stocks - item1.qty } });
-                // }
+
 
                 const data = {
                     email: cookieVal,
@@ -542,29 +441,6 @@ app.post("/addToOrders", async (req, res) => {
                 }
                 await orderCollection.insertMany([data])
             });
-
-
-
-
-            // const check = await orderCollection.findOne({ email: cookieVal })
-
-            // if (check) {
-
-
-            //     await orderCollection.updateOne(
-            //         { email: cookieVal },
-            //         { $push: { allOrders: { $each: allOrders } } },
-            //       );
-
-            // }
-            // else {
-            //     const data = {
-            //         email: cookieVal,
-            //         allOrders: allOrders
-            //     }
-            //     await orderCollection.insertMany([data])
-
-            // }
 
             if (isProductFromCart == true) {
                 await cartCollection.updateOne({ email: cookieVal }, { $set: { allProducts: [] } });
@@ -589,13 +465,11 @@ app.post("/submitRating", async (req, res) => {
     const productName = req.body.productName
     try {
 
-        // let check=await userCollection.findOne({email:cookieVal})
 
         let obj = {
             name: cookieVal,
             rating: selectedOption
         }
-        // const check = await orderCollection.findOne({ email: cookieVal })
         await productCollection.updateOne(
             { name: productName },
             { $push: { allRatings: obj } }
@@ -615,13 +489,11 @@ app.post("/submitReview", async (req, res) => {
     const productName = req.body.productName
     try {
 
-        // let check=await userCollection.findOne({email:cookieVal})
 
         let obj = {
             name: cookieVal,
             message: review
         }
-        // const check = await orderCollection.findOne({ email: cookieVal })
         await productCollection.updateOne(
             { name: productName },
             { $push: { reviews: obj } }
@@ -645,8 +517,8 @@ app.post("/getItemsFromOrderCollection", async (req, res) => {
         if (check.length != 0) {
 
             let arr = []
-            
-              Promise.all(check.map(async (e) => {
+
+            Promise.all(check.map(async (e) => {
                 const checkInProducts = await productCollection.findOne({ name: e.nameOfProduct })
                 let SingleItemPageObj = checkInProducts
                 let qty = e.qty
@@ -660,14 +532,14 @@ app.post("/getItemsFromOrderCollection", async (req, res) => {
                 arr.push({ SingleItemPageObj, qty, date, time, phoneNum, address, pincode, cardNum })
 
 
-            })) .then(() => {
+            })).then(() => {
                 res.json(arr)
-              })
-              .catch((error) => {
-                res.json("fail")
-              });
+            })
+                .catch((error) => {
+                    res.json("fail")
+                });
 
-            
+
 
 
 
@@ -683,7 +555,6 @@ app.post("/getItemsFromOrderCollection", async (req, res) => {
 
 })
 
-// const MY_EMAIL=process.env.REACT_APP_MY_EMAIL
 
 app.post('/sendEmail', async (req, res) => {
 
@@ -797,9 +668,5 @@ app.post("/signup", async (req, res) => {
 })
 
 
-
-// app.listen(PORT, () => {
-//     console.log('Server listening on port');
-// });
 
 app.listen(PORT);

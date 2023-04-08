@@ -39,7 +39,6 @@ export default function Navbar() {
           query
         })
           .then(res => {
-            // let finalArr = res.data
             searchQuery(res.data)
             setProgress(70)
             navigate("/searchpage")
@@ -105,13 +104,13 @@ export default function Navbar() {
 
     recognition.onresult = async (event) => {
       let query = event.results[0][0].transcript;
+      toast.success(query)
 
       setQuery(query)
       await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
         query
       })
         .then(res => {
-          // let finalArr = res.data
           searchQuery(res.data)
           setMicState(false)
           setProgress(70)
@@ -127,34 +126,10 @@ export default function Navbar() {
     };
 
 
-    // const [scanResult, setScanResult] = useState(null);
-
-    // const handleScan = (data) => {
-    //   if (data) {
-    //     setScanResult(data);
-    //   }
-    // };
-
-    // const handleError = (err) => {
-    // };
-    // function handleError(){
-
-    // }
-
-    // const clicked=()=>{
-    // }
+    
   }
 
-  // const [scanResult, setScanResult] = useState(null);
-
-  // const handleScan = (data) => {
-  //   if (data) {
-  //     setScanResult(data);
-  //   }
-  // };
-
-  // const handleError = (err) => {
-  // };
+ 
 
   return (
     <div className='sticky top-0 z-50'>

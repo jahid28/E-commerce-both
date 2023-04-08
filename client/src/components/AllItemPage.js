@@ -19,8 +19,8 @@ export default function AllItemPage(props) {
 
 const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
 
-    toast.success(process.env.REACT_APP_SERVER_URL)
-    toast.info(selectedOption)
+    // toast.success(process.env.REACT_APP_SERVER_URL)
+    // toast.info(selectedOption)
 
 
 
@@ -43,20 +43,20 @@ const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
                 selectedOption
             })
                 .then(res => {
-                    // setProgress(50)
-                    // setTotalPages(12)
-                    // const x = res.data
-                    // setData(x.allProducts)
-                    // setTotalPages(Math.ceil((x.totalItems) / 12))
-                    // setPageNum(1)
-                    // setProgress(100)
-                    if(res.data=="jk"){
-                        toast.success('jk')
-                    }
+                    setProgress(50)
+                    setTotalPages(12)
+                    const x = res.data
+                    setData(x.allProducts)
+                    setTotalPages(Math.ceil((x.totalItems) / 12))
+                    setPageNum(1)
+                    setProgress(100)
+                    // if(res.data=="jk"){
+                    //     toast.success('jk')
+                    // }
                     
-                    else{
-                        toast.success('nothing')
-                    }
+                    // else{
+                    //     toast.success('nothing')
+                    // }
                 })
                 .catch(e => {
                     toast.error("Somethig went wrong!");
