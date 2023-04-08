@@ -70,7 +70,9 @@ export default function Navbar() {
     const cookie = Cookies.get("email")
 
     if (cookie == undefined || cookie == null) {
-      toast.error("You need to login first")
+      toast.warn("You need to login first")
+      navigate("/login")
+
     }
     else {
       navigate("/cart")
@@ -80,7 +82,9 @@ export default function Navbar() {
     const cookie = Cookies.get("email")
 
     if (cookie == undefined || cookie == null) {
-      toast.error("You need to login first")
+      toast.warn("You need to login first")
+      navigate("/login")
+
     }
     else {
       navigate("/orders")

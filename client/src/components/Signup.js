@@ -56,7 +56,7 @@ export default function Signup() {
     try {
 
       if (formData.password != formData.cpassword) {
-        toast.error("Password is not same");
+        toast.error("Passwords are not same");
       }
       else if (formData.password.length < 6) {
         toast.error("Password must be atleast 6 characters")

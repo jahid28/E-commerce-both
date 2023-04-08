@@ -31,7 +31,7 @@ export default function Orders() {
       })
         .then(res => {
           if (res.data == "noitems") {
-            toast.error("You donot have any orders")
+            toast.warn("You donot have any orders")
           }
           else if (res.data == "fail") {
             toast.error("Something went wrong");

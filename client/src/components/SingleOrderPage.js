@@ -1,122 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import axios from "axios"
-import Cookies from "js-cookie";
-
-import { ToastContainer, toast } from 'react-toastify';
-import LoadingBar from 'react-top-loading-bar'
 import { useDispatch, useSelector } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/index.js'
+
 
 export default function SingleItemPage(props) {
-    // const navigate = useNavigate()
-    // const [progress, setProgress] = useState(0)
-    // const { decCounter, incCounter, SmallCartPreviewArr, SmallCartPreviewTotal, isProductFromCart } = bindActionCreators(actionCreators, useDispatch())
     const counter = useSelector(state => state.counter)
 
     const SingleOrderPageObj = counter.SingleOrderPageObj
-
-    // const imgArr = SingleItemPageObj.img
-    // const [bigImage, setBigImage] = useState((SingleItemPageObj.img)[0])
-
-    // const imgChange = (e) => {
-    //     setBigImage(e.target.getAttribute("src"))
-    // }
-
-
-
-    // const addToCart = async (e) => {
-    //     if (SingleItemPageObj.stocks == 0) {
-    //         toast.error("Product is out of stock")
-    //         return
-    //     }
-    //     setProgress(20)
-
-    //     try {
-    //         let qty = counter.number
-    //         const cookieVal = Cookies.get("email")
-    //         const nameOfProduct = SingleItemPageObj.name
-    //         setProgress(50)
-
-    //         if (cookieVal == undefined || cookieVal == null) {
-    //             toast.error("You need to login first");
-    //             setProgress(70)
-    //         }
-    //         else {
-    //             await axios.post("${process.env.REACT_APP_SERVER_URL}/addToCart", {
-    //                 cookieVal, nameOfProduct, qty
-    //             })
-    //                 .then(res => {
-    //                     if (res.data == "pass") {
-    //                         toast.success("Product added to the cart");
-    //                     }
-    //                     else if (res.data == "alreadyAdded") {
-    //                         toast.warn("Product already added");
-    //                     }
-    //                     else if (res.data == "fail") {
-    //                         toast.error("Something went wrong");
-    //                     }
-
-    //                     setProgress(70)
-    //                 })
-    //                 .catch(e => {
-    //                     toast.error("Somethig went wrong!");
-    //                 })
-    //         }
-    //     }
-
-
-    //     catch (e) {
-    //         toast.error("Somethig went wrong!");
-
-
-    //     }
-    //     setProgress(100)
-
-    // }
-    // useEffect((e) => {
-    //     setProgress(100)
-    // }, [])
-
-    // const goToAddress = () => {
-    //     setProgress(20)
-    //     const cookieVal = Cookies.get("email")
-
-    //     if (cookieVal == undefined || cookieVal == null) {
-    //         toast.error("You need to login first");
-    //     }
-    //     else if (SingleItemPageObj.stocks == 0) {
-    //         toast.error("Product is out of stock")
-    //     }
-    //     else {
-    //         SmallCartPreviewArr([{ SingleItemPageObj, qty: counter.number }])
-    //         isProductFromCart(false)
-    //         SmallCartPreviewTotal(SingleItemPageObj.price * counter.number)
-    //         navigate("/address")
-    //     }
-    //     setProgress(100)
-    // }
-
-    // let totalRating
-    // let sum = 0
-
-    // SingleItemPageObj.allRatings.map((e) => {
-    //     sum += e.rating
-    // })
-
-    // sum != 0 ? totalRating = sum / SingleItemPageObj.allRatings.length : totalRating = 0
 
 
 
 
     return (
         <div>
-            {/* <LoadingBar
-                color='red'
-                progress={progress}
-                onLoaderFinished={() => setProgress(0)}
-            /> */}
 
 
             <h2 className='text-center font-extrabold text-3xl my-2'>Order Details</h2>

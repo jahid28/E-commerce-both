@@ -32,7 +32,7 @@ export default function Cart() {
       })
         .then(res => {
           if (res.data == "noitems") {
-            toast.error("Your cart is empty")
+            toast.warn("Your cart is empty")
           }
           else if (res.data == "fail") {
             toast.error("Something went wrong");

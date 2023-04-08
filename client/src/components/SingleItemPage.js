@@ -37,7 +37,7 @@ export default function SingleItemPage(props) {
 
     const addToCart = async (e) => {
         if (SingleItemPageObj.stocks == 0) {
-            toast.error("Product is out of stock")
+            toast.warn("Product is out of stock")
             return
         }
         setProgress(20)
@@ -49,8 +49,9 @@ export default function SingleItemPage(props) {
             setProgress(50)
 
             if (cookieVal == undefined || cookieVal == null) {
-                toast.error("You need to login first");
+                toast.warn("Login to continue");
                 setProgress(70)
+                navigate('/login')
             }
             else {
                 await axios.post(`${process.env.REACT_APP_SERVER_URL}/addToCart`, {
@@ -93,7 +94,8 @@ export default function SingleItemPage(props) {
         const cookieVal = Cookies.get("email")
 
         if (cookieVal == undefined || cookieVal == null) {
-            toast.error("You need to login first");
+            toast.warn("Login to continue");
+            navigate('/login')
         }
         else if (SingleItemPageObj.stocks == 0) {
             toast.error("Product is out of stock")
@@ -211,7 +213,7 @@ export default function SingleItemPage(props) {
                         {
                             (SingleItemPageObj.reviews).map((e) => (
                                 <div className='my-4'>
-                                    <p className='text-sm text-gray-500'>~{e.name}</p>
+                                    <p className='text-sm text-gray-500'>~{(e.name).split("@")[0]}</p>
                                     <p className='text-xl'>{e.message}</p>
                                     <hr className='border-gray-500' />
                                 </div>
