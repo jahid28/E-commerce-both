@@ -33,12 +33,18 @@ export default function AllItemPage(props) {
                 selectedOption
             })
                 .then(res => {
+                   if(res.data=='fail'){
+                    toast.error("ufffffffffff")
+
+                   }
+                   else{
                     setProgress(50)
                     const x = res.data
-                    setData(x.allProducts)
+                    setData(res.data.allProducts)
                     setTotalPages(Math.ceil((x.totalItems) / 12))
                     setPageNum(1)
                     setProgress(100)
+                   }
                     // if(res.data=="jk"){
                     //     toast.success('jk')
                     // }
