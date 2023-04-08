@@ -10,18 +10,8 @@ export default function AllItemPage(props) {
     const [selectedOption, setSelectedOption] = useState('All');
     const [totalPages, setTotalPages] = useState(0)
     const [pageNum, setPageNum] = useState(1)
-    // const [count, setCount] = useState(1)
-    // setInterval(() => {
-    //     setCount(count+1)
-        
-    // }, 2000);
 
-
-const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
-
-    // toast.success(process.env.REACT_APP_SERVER_URL)
-    // toast.info(selectedOption)
-
+    const URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
 
 
     const typeChange = (event) => {
@@ -44,7 +34,6 @@ const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
             })
                 .then(res => {
                     setProgress(50)
-                    setTotalPages(12)
                     const x = res.data
                     setData(x.allProducts)
                     setTotalPages(Math.ceil((x.totalItems) / 12))
@@ -53,7 +42,7 @@ const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
                     // if(res.data=="jk"){
                     //     toast.success('jk')
                     // }
-                    
+
                     // else{
                     //     toast.success('nothing')
                     // }
@@ -61,10 +50,10 @@ const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
                 .catch(e => {
                     toast.error("Somethig went wrong!");
                 })
-            }
-            
-            
-            catch (e) {
+        }
+
+
+        catch (e) {
             toast.error("Somethig went wrong!");
 
         }
@@ -99,11 +88,11 @@ const URL=process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
                 .catch(e => {
                     toast.error("Somethig went wrong!");
                 })
-            }
+        }
 
 
         catch (e) {
-            
+
             toast.error("Somethig went wrong!");
         }
 

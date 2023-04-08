@@ -77,26 +77,32 @@ app.post("/getProducts", async (req, res) => {
 
         if (type == "All") {
 
-            const allProducts = await productCollection.find({}).skip(0).limit(12)
-            const totalItems = await productCollection.find({}).countDocuments()
-            const data = {
+            const allProductsPromise = productCollection.find({}).skip(0).limit(12).toArray();
+            const totalItemsPromise = productCollection.find({}).countDocuments();
+            
+            Promise.all([allProductsPromise, totalItemsPromise]).then(([allProducts, totalItems]) => {
+              const data = {
                 allProducts,
                 totalItems
-            }
-            res.json(data)
+              };
+              res.json(data)
+            });
 
 
 
         }
         else {
 
-            const allProducts = await productCollection.find({ type: type }).skip(0).limit(12)
-            const totalItems = await productCollection.find({ type: type }).countDocuments()
-            const data = {
+            const allProductsPromise = productCollection.find({type: type}).skip(0).limit(12).toArray();
+            const totalItemsPromise = productCollection.find({type: type}).countDocuments();
+            
+            Promise.all([allProductsPromise, totalItemsPromise]).then(([allProducts, totalItems]) => {
+              const data = {
                 allProducts,
                 totalItems
-            }
-            res.json(data)
+              };
+              res.json(data)
+            });
 
 
         }
