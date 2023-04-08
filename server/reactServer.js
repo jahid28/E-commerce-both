@@ -74,7 +74,6 @@ app.post("/pageChange", async (req, res) => {
 app.post("/getProducts", async (req, res) => {
     try {
         const type =req.body.selectedOption
-        console.log(type)
 
 
         if (type == "All") {
@@ -102,7 +101,6 @@ app.post("/getProducts", async (req, res) => {
                 allProducts:allProductsPromise,
                 totalItems:totalItemsPromise
               };
-              console.log(totalItemsPromise)
               res.json(data)
             
 
