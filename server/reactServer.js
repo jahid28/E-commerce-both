@@ -74,6 +74,7 @@ app.post("/pageChange", async (req, res) => {
 app.post("/getProducts", async (req, res) => {
     try {
         const type =req.body.selectedOption
+        console.log(type)
 
 
         if (type == "All") {
@@ -94,16 +95,16 @@ app.post("/getProducts", async (req, res) => {
         }
         else {
 
-            const allProductsPromise = productCollection.find({type: type}).skip(0).limit(12).toArray();
-            const totalItemsPromise = productCollection.find({type: type}).countDocuments();
+            const allProductsPromise =await productCollection.find({type: type}).skip(0).limit(12);
+            const totalItemsPromise =await productCollection.find({type: type}).countDocuments();
             
-            Promise.all([allProductsPromise, totalItemsPromise]).then(([allProducts, totalItems]) => {
               const data = {
-                allProducts,
-                totalItems
+                allProducts:allProductsPromise,
+                totalItems:totalItemsPromise
               };
+              console.log(totalItemsPromise)
               res.json(data)
-            });
+            
 
 
         }
