@@ -1,12 +1,6 @@
 require("dotenv").config()
 const mongoose=require("mongoose")
 mongoose.connect(`${process.env.MY_DATABASE_URL}`)
-    // .then(() => {
-    //     console.log("react mongodb connected");
-    // })
-    // .catch(() => {
-    //     console.log('failed');
-    // })
 
 const userSchema = new mongoose.Schema({
     name: {

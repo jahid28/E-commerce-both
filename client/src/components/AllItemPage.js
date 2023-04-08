@@ -11,15 +11,14 @@ export default function AllItemPage(props) {
     const [totalPages, setTotalPages] = useState(0)
     const [pageNum, setPageNum] = useState(1)
 
-    const URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
+    // const URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'
 
 
-    const typeChange = (event) => {
-        event.preventDefault()
+    // const typeChange = (event) => {
 
-        setSelectedOption(event.target.value);
+    //     setSelectedOption(event.target.value);
 
-    };
+    // };
 
 
 
@@ -29,7 +28,7 @@ export default function AllItemPage(props) {
 
         try {
 
-            await axios.post(`${URL}/getProducts`, {
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/getProducts`, {
                 selectedOption
             })
                 .then(res => {
@@ -40,7 +39,7 @@ export default function AllItemPage(props) {
                    else{
                     setProgress(50)
                     const x = res.data
-                    setData(res.data.allProducts)
+                    setData(x.allProducts)
                     setTotalPages(Math.ceil((x.totalItems) / 12))
                     setPageNum(1)
                     setProgress(100)
@@ -129,7 +128,7 @@ export default function AllItemPage(props) {
             />
 
             <h2 className='font-bold text-base my-2 ml-3 lg:text-3xl lg:my-4' >Search by Categories : </h2>
-            <select className='border border-black rounded mb-2 ml-3 lg:text-xl' value={selectedOption} onChange={typeChange} >
+            <select className='border border-black rounded mb-2 ml-3 lg:text-xl' value={selectedOption} onChange={(e)=>{setSelectedOption(e.target.value)}} >
                 <option >All</option>
                 <option >Electronics</option>
                 <option >Fashion</option>

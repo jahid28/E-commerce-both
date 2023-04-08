@@ -78,16 +78,16 @@ app.post("/getProducts", async (req, res) => {
 
         if (type == "All") {
 
-            const allProductsPromise = productCollection.find({}).skip(0).limit(12).toArray();
-            const totalItemsPromise = productCollection.find({}).countDocuments();
-            
-            Promise.all([allProductsPromise, totalItemsPromise]).then(([allProducts, totalItems]) => {
+            const allProductsPromise = await productCollection.find({}).skip(0).limit(12);
+            const totalItemsPromise =await  productCollection.find({}).countDocuments();
+            // Promise.all([allProductsPromise, totalItemsPromise]).then(([allProducts, totalItems]) => {
               const data = {
-                allProducts,
-                totalItems
+                allProducts:allProductsPromise,
+                totalItems:totalItemsPromise
               };
-              res.json(data)
-            });
+            
+                res.json(data)
+           
 
 
 
@@ -139,7 +139,7 @@ app.post("/search", async (req, res) => {
     try {
         const products = await productCollection.find({})
 
-        Promise.all(products.forEach(e => {
+        products.forEach(e => {
             let sum = 0
             for (let i = 0; i < words.length; i++) {
                 const name = e.name;
@@ -163,12 +163,7 @@ app.post("/search", async (req, res) => {
 
             }
 
-        })).then(() => {
-            res.json(finalArr)
         })
-            .catch((error) => {
-                res.json("fail")
-            });
 
         res.json(finalArr)
     }
