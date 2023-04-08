@@ -82,6 +82,7 @@ export default function Login() {
             <ReCAPTCHA
               sitekey={`${process.env.REACT_APP_RECAPTCHA}`}
               onChange={(value) => setCaptchaValue(value)}
+              domain="ecommerce-both-frontend.onrender.com"
             />
 
 

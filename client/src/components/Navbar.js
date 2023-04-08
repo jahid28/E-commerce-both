@@ -104,7 +104,6 @@ export default function Navbar() {
 
     recognition.onresult = async (event) => {
       let query = event.results[0][0].transcript;
-      toast.success(query)
 
       setQuery(query)
       await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
