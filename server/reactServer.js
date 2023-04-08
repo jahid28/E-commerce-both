@@ -73,6 +73,7 @@ app.post("/pageChange", async (req, res) => {
 
 app.post("/getProducts", async (req, res) => {
     try {
+        const type =req.body.selectedOption
 
 
         if (type == "All") {
