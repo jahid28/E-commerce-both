@@ -1,43 +1,47 @@
 import React, { useState, useEffect, useRef } from 'react';
 import randomstring from 'randomstring';
 import axios from "axios"
+import ReCAPTCHA from "react-google-recaptcha";
+
 import { ToastContainer, toast } from 'react-toastify';
 // import jwt from 'jsonwebtoken'
 import Cookies from "js-cookie";
 import { useNavigate, Link } from "react-router-dom"
 
 export default function Signup() {
+  const [captchaValue, setCaptchaValue] = useState(null);
+
   const canvasRef = useRef(null);
-  const [captchaText, setCaptchaText] = useState('');
+  // const [captchaText, setCaptchaText] = useState('');
   const [inp, setInp] = useState('');
 
-  useEffect(() => {
-    setCaptchaText(randomstring.generate(6));
-  }, []);
+  // useEffect(() => {
+  //   setCaptchaText(randomstring.generate(6));
+  // }, []);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const fontSize = 35;
-    const width = canvas.width;
-    const height = canvas.height;
+  // useEffect(() => {
+  //   const canvas = canvasRef.current;
+  //   const ctx = canvas.getContext('2d');
+  //   const fontSize = 35;
+  //   const width = canvas.width;
+  //   const height = canvas.height;
 
-    ctx.clearRect(0, 0, width, height);
+  //   ctx.clearRect(0, 0, width, height);
 
-    ctx.font = `${fontSize}px Arial`;
-    ctx.fillText(captchaText, 40, 40);
+  //   ctx.font = `${fontSize}px Arial`;
+  //   ctx.fillText(captchaText, 40, 40);
 
-    for (let i = 0; i < 5; i++) {
-      const startX = Math.random() * width;
-      const startY = Math.random() * height;
-      const endX = Math.random() * width;
-      const endY = Math.random() * height;
-      ctx.beginPath();
-      ctx.moveTo(startX, startY);
-      ctx.lineTo(endX, endY);
-      ctx.stroke();
-    }
-  }, [captchaText]);
+  //   for (let i = 0; i < 5; i++) {
+  //     const startX = Math.random() * width;
+  //     const startY = Math.random() * height;
+  //     const endX = Math.random() * width;
+  //     const endY = Math.random() * height;
+  //     ctx.beginPath();
+  //     ctx.moveTo(startX, startY);
+  //     ctx.lineTo(endX, endY);
+  //     ctx.stroke();
+  //   }
+  // }, [captchaText]);
 
 
 
@@ -62,8 +66,8 @@ export default function Signup() {
         toast.error("Password must be atleast 6 characters")
 
       }
-      else if (inp != captchaText) {
-        toast.error("Invalid Captcha");
+      else if (!captchaValue) {
+        toast.error("Fill the Captcha");
       }
       else {
 
@@ -129,11 +133,17 @@ export default function Signup() {
               <input value={formData.cpassword} onChange={(event) => setFormData({ ...formData, [event.target.name]: event.target.value })} required type="password" id="cpassword" name="cpassword" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
 
-            <label htmlFor="userInput">Enter the Captcha shown below :</label>
+            {/* <label htmlFor="userInput">Enter the Captcha shown below :</label>
             <input value={inp} type="text" className="mt-2 mb-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" onChange={(e) => { setInp(e.target.value) }} required />
-            <canvas ref={canvasRef} width="200" height="50" className='mt-2 mb-2 w-52 border border-black' />
+            <canvas ref={canvasRef} width="200" height="50" className='mt-2 mb-2 w-52 border border-black' /> */}
 
-            <input className="cursor-pointer text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit" value={"Submit"} />
+            <ReCAPTCHA
+              sitekey={`${process.env.REACT_APP_RECAPTCHA}`}
+              onChange={(value) => setCaptchaValue(value)}
+              domain="ecommerce-both-frontend.onrender.com"
+            />
+
+            <input className="cursor-pointer mt-2 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit" value={"Submit"} />
             <p className="text-base text-gray-500 mt-3">Already have an account? </p>
             <p className="text-base text-blue-700 mt-3"><Link to={"/login"}>Login</Link> </p>
 

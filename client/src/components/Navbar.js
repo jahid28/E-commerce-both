@@ -151,7 +151,7 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="md:hidden">
-            <button onClick={toggleMenu} className="text-gray-500 hover:text-white focus:outline-none focus:text-white">
+            <button onClick={toggleMenu} className="text-white">
               <i className="cursor-pointer ml-3 mr-2 fa-solid fa-bars scale-150"></i>
             </button>
           </div>
@@ -163,9 +163,6 @@ export default function Navbar() {
             <div className="relative flex mx-auto text-gray-600 ">
               {/* <i class="text-white text-xl mr-3 fa-solid fa-volume-high"></i> */}
               {/* {micState ? <i class="text-white text-xl mr-3 fa-solid fa-volume-high"></i> : */}
-              {micState ? <p className='text-white text-base font-medium mr-2'>Speak Now</p> :
-                <i onClick={handleStart} class=" text-white fa-solid fa-microphone  text-xl mr-3 cursor-pointer"></i>
-              }
 
               <div className=" relative md:w-64 w-50 md:mr-4 mr-2 ">
                 <input value={query} onChange={(e) => { setQuery(e.target.value) }} type="text" placeholder='Search' id="footer-field" name="footer-field" className="h-8 w-full bg-gray-100  rounded border border-gray-300 focus:ring-2  focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-0 pl-2 leading-8 transition-colors duration-200 ease-in-out" />
@@ -173,12 +170,15 @@ export default function Navbar() {
 
               <button type='submit' className=' text-white bg-indigo-500  px-4 focus:outline-none hover:bg-indigo-600  cursor-pointer  border-gray-200  border-solid rounded-lg ml-0'><i className="fa-solid fa-magnifying-glass w-[20px]"></i></button>
 
+              {micState ? <p className='text-white text-base font-medium ml-2'>Speak Now</p> :
+                <i onClick={handleStart} class=" text-white fa-solid fa-microphone  text-xl ml-3 cursor-pointer"></i>
+              }
             </div>
           </form>
 
 
 
-          <Link to={"/login"}><a className='block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700 md:ml-4'>Account/Login  </a></Link>
+   <Link className='block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700 md:ml-4' to={"/login"}>Account/Login </Link> 
           <a className='cursor-pointer block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700 md:ml-4' onClick={goToOrders}>Orders </a>
           <a className='cursor-pointer block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700  md:ml-4' onClick={goToCart} ><i className="fa-solid fa-cart-shopping "></i> </a>
 

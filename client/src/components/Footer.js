@@ -10,17 +10,15 @@ export default function Footer() {
             <div class="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">See All Categories</h2>
               <nav class="list-none mb-10">
+               
                 <li>
-                  <a class="text-gray-600 hover:text-gray-800"></a>
+                  <a href='https://www.youtube.com/@techywebdev8393' class="text-gray-600 hover:text-gray-800">YT Channel</a>
                 </li>
                 <li>
-                  <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                  <a href='https://www.youtube.com/@techywebdev8393' class="text-gray-600 hover:text-gray-800">Twitter</a>
                 </li>
                 <li>
-                  <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                  <a href='https://www.youtube.com/@techywebdev8393' class="text-gray-600 hover:text-gray-800">Featured!</a>
                 </li>
               </nav>
             </div>

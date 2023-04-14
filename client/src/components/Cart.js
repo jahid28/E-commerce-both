@@ -7,12 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/index.js'
+import PulseLoader from "react-spinners/PulseLoader";
+
 
 export default function Cart() {
   const navigate = useNavigate()
 
   const [data, setData] = useState([])
   const [progress, setProgress] = useState(0)
+  const [loading, setLoading] = useState(true)
 
   const { isProductFromCart, SingleItemPageObj, SmallCartPreviewArr, SmallCartPreviewTotal } = bindActionCreators(actionCreators, useDispatch())
   // const counter = useSelector(state => state.counter)
@@ -33,12 +36,14 @@ export default function Cart() {
         .then(res => {
           if (res.data == "noitems") {
             toast.warn("Your cart is empty")
+            setLoading(false)
           }
           else if (res.data == "fail") {
             toast.error("Something went wrong");
           }
           else {
             setData(res.data)
+            setLoading(false)
           }
 
 
@@ -203,71 +208,79 @@ export default function Cart() {
 
 
   return (
-    <div>
-      <LoadingBar
-        color='red'
-        progress={progress}
-        onLoaderFinished={() => setProgress(0)}
-      />
+    loading == false ?
+
+      <div>
+        <LoadingBar
+          color='red'
+          progress={progress}
+          onLoaderFinished={() => setProgress(0)}
+        />
 
 
 
-      {
-        data.length > 0 ?
-          <div>
-            <h1 className=' text-3xl font-bold mt-3 ml-3 text-center mb-10'>Your Cart</h1>
+        {
+          data.length > 0 ?
+            <div>
+              <h1 className=' text-3xl font-bold mt-3 ml-3 text-center mb-10'>Your Cart</h1>
 
-            {data.map((e, index) => (
-              <div key={e.id} className=' my-3'>
-                <section className="text-gray-600 w-[95vw] my-3 flex   body-font overflow-hidden   mx-auto">
-                  <div className='w-3/12 mr-3   grid place-items-center'>
-                    <img onClick={() => goToProductPage(index)} alt="ecommerce" className="cursor-pointer items-center w-fit object-cover object-center rounded" src={e.SingleItemPageObj.img[0]} />
-                  </div>
-                  <div className=" w-8/12 flex-col flex">
-                    <h2 className="text-xs lg:text-lg text-gray-500 tracking-widest">Type : {e.SingleItemPageObj.type}</h2>
-                    <h1 onClick={() => goToProductPage(index)} className="cursor-pointer hover:text-pink-500 w-fit text-gray-900 text-lg lg:text-2xl title-font font-medium mb-1">{e.SingleItemPageObj.name}</h1>
-
-                    {
-                      e.SingleItemPageObj.stocks > 0 ? <p className="mt-1 text-white bg-green-500 w-fit px-2 rounded-lg">In Stock</p> : <p className="mt-1 text-white bg-red-500 w-fit px-2 rounded-lg">Out of Stock</p>
-
-                    }
-
-                    <div className="flex my-2 ">
-                      <button disabled={e.qty <= 1 ? true : false} onClick={() => decQty(e.SingleItemPageObj.name)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center inline-flex items-center mx-2  ">-</button>
-                      <p className='font-sans '>Qty : {e.qty}</p>
-                      <button disabled={e.qty >= e.SingleItemPageObj.stocks ? true : false} onClick={() => incQty(e.SingleItemPageObj.name)} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center  items-center mx-2">+</button>
+              {data.map((e, index) => (
+                <div key={e.id} className=' my-3'>
+                  <section className="text-gray-600 w-[95vw] my-3 flex   body-font overflow-hidden   mx-auto">
+                    <div className='w-3/12 mr-3   grid place-items-center'>
+                      <img onClick={() => goToProductPage(index)} alt="ecommerce" className="cursor-pointer items-center w-fit object-cover object-center rounded" src={e.SingleItemPageObj.img[0]} />
                     </div>
-                    <div className="flex mt-auto">
-                      <span className="title-font font-medium text-xl lg:text-2xl text-gray-900">₹ {e.SingleItemPageObj.price}.00</span>
-                      <button onClick={() => handleButtonClick(e.SingleItemPageObj.name)} className="  ml-auto text-white bg-gray-400  py-0 px-4 focus:outline-none hover:bg-gray-600 rounded">Delete</button>
+                    <div className=" w-8/12 flex-col flex">
+                      <h2 className="text-xs lg:text-lg text-gray-500 tracking-widest">Type : {e.SingleItemPageObj.type}</h2>
+                      <h1 onClick={() => goToProductPage(index)} className="cursor-pointer hover:text-pink-500 w-fit text-gray-900 text-lg lg:text-2xl title-font font-medium mb-1">{e.SingleItemPageObj.name}</h1>
+
+                      {
+                        e.SingleItemPageObj.stocks > 0 ? <p className="mt-1 text-white bg-green-500 w-fit px-2 rounded-lg">In Stock</p> : <p className="mt-1 text-white bg-red-500 w-fit px-2 rounded-lg">Out of Stock</p>
+
+                      }
+
+                      <div className="flex my-2 ">
+                        <button disabled={e.qty <= 1 ? true : false} onClick={() => decQty(e.SingleItemPageObj.name)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center inline-flex items-center mx-2  ">-</button>
+                        <p className='font-sans '>Qty : {e.qty}</p>
+                        <button disabled={e.qty >= e.SingleItemPageObj.stocks ? true : false} onClick={() => incQty(e.SingleItemPageObj.name)} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center  items-center mx-2">+</button>
+                      </div>
+                      <div className="flex mt-auto">
+                        <span className="title-font font-medium text-xl lg:text-2xl text-gray-900">₹ {e.SingleItemPageObj.price}.00</span>
+                        <button onClick={() => handleButtonClick(e.SingleItemPageObj.name)} className="  ml-auto text-white bg-gray-400  py-0 px-4 focus:outline-none hover:bg-gray-600 rounded">Delete</button>
+                      </div>
                     </div>
-                  </div>
-                </section>
-                <hr className=' border-gray-500' />
+                  </section>
+                  <hr className=' border-gray-500' />
+                </div>
+
+
+              ))}
+
+              <div className="my-6 flex flex-wrap  items-center">
+                <h2 className='font-semibold text-xl ml-3 mr-3'>Your Subtotal : ₹ {subTotal}.00</h2>
+                <button onClick={goToAddress} className=" text-white bg-indigo-500 border-0 py-1 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Buy</button>
               </div>
-
-
-            ))}
-
-            <div className="my-6 flex flex-wrap  items-center">
-              <h2 className='font-semibold text-xl ml-3 mr-3'>Your Subtotal : ₹ {subTotal}.00</h2>
-              <button onClick={goToAddress} className=" text-white bg-indigo-500 border-0 py-1 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Buy</button>
             </div>
-          </div>
-          :
+            :
 
-          <div className='w-full  grid place-items-center lg:flex'>
-            <h2 className='w-6/12 text-center lg:w-4/12 my-3 lg:my-0 lg:ml-4 font-bold text-xl lg:text-5xl'>Your cart is empty</h2>
+            <div className='w-full  grid place-items-center lg:flex'>
+              <h2 className='w-6/12 text-center lg:w-4/12 my-3 lg:my-0 lg:ml-4 font-bold text-xl lg:text-5xl'>Your cart is empty</h2>
 
-            <img className='w-6/12' src={require('./Images/empty-freepik (1).jpg')} alt="" />
+              <img className='w-6/12' src={require('./Images/empty-freepik (1).jpg')} alt="" />
 
-          </div>
-      }
+            </div>
+        }
 
-
-
-
-
-    </div>
+      </div>
+      :
+      <div className='flex justify-center w-full my-10'>
+        <PulseLoader
+          color='rgb(74, 87, 224)'
+          loading={loading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
   )
 }

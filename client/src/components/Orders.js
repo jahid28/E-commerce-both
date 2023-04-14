@@ -1,19 +1,22 @@
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import LoadingBar from 'react-top-loading-bar'
-// useState
 import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/index.js'
+import PulseLoader from "react-spinners/PulseLoader";
+
+
 export default function Orders() {
   const [progress, setProgress] = useState(0)
   const [data, setData] = useState([])
   const cookieVal = Cookies.get("email")
   const navigate = useNavigate()
   const {  SingleOrderPageObj} = bindActionCreators(actionCreators, useDispatch())
+  const [loading, setLoading] = useState(true)
 
 
   const getItemsFromOrderCollection = async (e) => {
@@ -31,12 +34,14 @@ export default function Orders() {
       })
         .then(res => {
           if (res.data == "noitems") {
+            setLoading(false)
             toast.warn("You donot have any orders")
           }
           else if (res.data == "fail") {
             toast.error("Something went wrong");
           }
           else {
+            setLoading(false)
             setData(res.data)
           }
 
@@ -173,6 +178,8 @@ export default function Orders() {
  
 
   return (
+    loading==false?
+
     <div>
       <LoadingBar
         color='red'
@@ -288,5 +295,15 @@ export default function Orders() {
       }
 
     </div>
+    :
+    <div className='flex justify-center w-full my-10'>
+        <PulseLoader
+          color='rgb(74, 87, 224)'
+          loading={loading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
   )
 }

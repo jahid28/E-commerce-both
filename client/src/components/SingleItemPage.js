@@ -18,16 +18,19 @@ import { Magnifier } from 'react-image-magnifiers';
 
 
 export default function SingleItemPage(props) {
+
     const navigate = useNavigate()
     const [progress, setProgress] = useState(0)
     const { decCounter, incCounter, SmallCartPreviewArr, SmallCartPreviewTotal, isProductFromCart } = bindActionCreators(actionCreators, useDispatch())
     const counter = useSelector(state => state.counter)
-
     const SingleItemPageObj = counter.SingleItemPageObj
-    // alert(SingleItemPageObj.type)
 
     const imgArr = SingleItemPageObj.img
     const [bigImage, setBigImage] = useState((SingleItemPageObj.img)[0])
+
+    useEffect((e) => {
+        setProgress(100)
+    }, [])
 
     const imgChange = (e) => {
         setBigImage(e.target.getAttribute("src"))
@@ -36,21 +39,23 @@ export default function SingleItemPage(props) {
 
 
     const addToCart = async (e) => {
-        if (SingleItemPageObj.stocks == 0) {
-            toast.warn("Product is out of stock")
-            return
-        }
-        setProgress(20)
+        // if (SingleItemPageObj.stocks == 0) {
+        //     toast.warn("Product is out of stock")
+        //     return
+        // }
+        // setProgress(20)
 
         try {
             let qty = counter.number
             const cookieVal = Cookies.get("email")
             const nameOfProduct = SingleItemPageObj.name
             setProgress(50)
+            if (SingleItemPageObj.stocks == 0) {
+                toast.warn("Product is out of stock")
+            }
 
-            if (cookieVal == undefined || cookieVal == null) {
+            else if (cookieVal == undefined || cookieVal == null) {
                 toast.warn("Login to continue");
-                setProgress(70)
                 navigate('/login')
             }
             else {
@@ -85,20 +90,19 @@ export default function SingleItemPage(props) {
         setProgress(100)
 
     }
-    useEffect((e) => {
-        setProgress(100)
-    }, [])
+
+
 
     const goToAddress = () => {
         setProgress(20)
         const cookieVal = Cookies.get("email")
 
-        if (cookieVal == undefined || cookieVal == null) {
+        if (SingleItemPageObj.stocks == 0) {
+            toast.warn("Product is out of stock")
+        }
+        else if (cookieVal == undefined || cookieVal == null) {
             toast.warn("Login to continue");
             navigate('/login')
-        }
-        else if (SingleItemPageObj.stocks == 0) {
-            toast.error("Product is out of stock")
         }
         else {
             SmallCartPreviewArr([{ SingleItemPageObj, qty: counter.number }])
@@ -137,23 +141,20 @@ export default function SingleItemPage(props) {
                         <div className='lg:w-1/2 flex flex-wrap w-full lg:h-auto '>
                             <div className='lg:w-1/12 flex flex-wrap mb-4 lg:mr-3'>
                                 {
-                                    imgArr.length > 0 ?
-                                        imgArr.map((e) => (
-                                            <div>
-                                                <img onMouseOver={imgChange} className='w-9  h-11 mr-4 lg:w-12 object-contain object-center border border-black rounded-md hover:shadow-md hover:shadow-indigo-500 cursor-pointer' src={e} alt="" />
-                                            </div>
-                                        ))
 
-                                        :
-                                        <p>Load</p>
+                                    imgArr.map((e) => (
+                                        <div>
+                                            <img onMouseOver={imgChange} className='w-9  h-11 mr-4 lg:w-12 object-contain object-center border border-black rounded-md hover:shadow-md hover:shadow-indigo-500 cursor-pointer' src={e} alt="" />
+                                        </div>
+                                    ))
+
                                 }
 
 
                             </div>
+                            
                             <div className=' lg:w-10/12 w-full h-[40vh] lg:h-[80vh] border border-black flex justify-center'>
                                 <img alt="ecommerce" className=" object-contain h-full rounded " src={bigImage} />
-
-
                             </div>
                         </div>
                         <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
