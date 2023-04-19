@@ -9,11 +9,9 @@ import SmallCartPreview from './SmallCartPreview.js';
 
 export default function Address() {
     const navigate = useNavigate()
-    const [captchaValue, setCaptchaValue] = useState(null);
-    // const counter = useSelector(state => state.counter)
     const { paymentDetails } = bindActionCreators(actionCreators, useDispatch())
-
-
+    
+    const [captchaValue, setCaptchaValue] = useState(null);
     const [formData, setFormData] = useState({
         phone: '',
         address: '',

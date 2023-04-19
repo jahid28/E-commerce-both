@@ -232,7 +232,7 @@ export default function Cart() {
                     </div>
                     <div className=" w-8/12 flex-col flex">
                       <h2 className="text-xs lg:text-lg text-gray-500 tracking-widest">Type : {e.SingleItemPageObj.type}</h2>
-                      <h1 onClick={() => goToProductPage(index)} className="cursor-pointer hover:text-pink-500 w-fit text-gray-900 text-lg lg:text-2xl title-font font-medium mb-1">{e.SingleItemPageObj.name}</h1>
+                      <h1 onClick={() => goToProductPage(index)} className="cursor-pointer hover:text-indigo-500 w-fit text-gray-900 text-lg lg:text-2xl title-font font-medium mb-1">{e.SingleItemPageObj.name}</h1>
 
                       {
                         e.SingleItemPageObj.stocks > 0 ? <p className="mt-1 text-white bg-green-500 w-fit px-2 rounded-lg">In Stock</p> : <p className="mt-1 text-white bg-red-500 w-fit px-2 rounded-lg">Out of Stock</p>

@@ -1,16 +1,11 @@
 import React, { useEffect, useState, CSSProperties } from 'react'
 import PulseLoader from "react-spinners/PulseLoader";
-
 import axios from 'axios';
 import LoadingBar from 'react-top-loading-bar'
 import { ToastContainer, toast } from 'react-toastify';
 import ItemCard from './ItemCard.js';
 
-// const override: CSSProperties = {
-//     display: "block",
-//     margin: "0 auto",
-//     borderColor: "red",
-//   };
+
 
 export default function AllItemPage(props) {
     const [progress, setProgress] = useState(0)
@@ -18,7 +13,7 @@ export default function AllItemPage(props) {
     const [selectedOption, setSelectedOption] = useState('All');
     const [totalPages, setTotalPages] = useState(0)
     const [pageNum, setPageNum] = useState(1)
-    let [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
 
     // const URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8000'

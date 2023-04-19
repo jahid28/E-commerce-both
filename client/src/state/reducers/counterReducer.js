@@ -1,30 +1,50 @@
 const initialState = {
-    text: [],
-    SingleItemPageObj: {},
+    searchQuery: "",
+    SingleItemPageObj: {
+        name: '',
+        type: '',
+        img: [],
+        price: 0,
+        stocks: 0,
+        allRatings: [],
+        reviews: []
+    },
     SmallCartPreviewArr: [],
     SmallCartPreviewTotal: 0,
     isProductFromCart: false,
-    number: 1,
+    // number: 1,
     paymentDetails:{},
-    SingleOrderPageObj:{}
+    SingleOrderPageObj:{
+        name: '',
+        type: '',
+        img: [],
+        price: 0,
+        date:'',
+        time:'',
+        stocks: 0,
+        phoneNum: 0,
+        address: '',
+        pinCode: 0,
+        cardNum: 0
+    }
   };
 
 const reducer=(state=initialState,action)=>{
     
     switch (action.type) {
-        case 'decrease':
-            // text: action.payload
-            return { ...state, number: state.number - action.payload }
+        // case 'decrease':
+        //     // text: action.payload
+        //     return { ...state, number: state.number - action.payload }
             
-            break;
+        //     break;
 
-        case 'increase':
-            return  { ...state, number: state.number + action.payload }
+        // case 'increase':
+        //     return  { ...state, number: state.number + action.payload }
             
-            break;
+        //     break;
 
         case 'searchQuery':
-            return  { ...state, text: action.payload }
+            return  { ...state, searchQuery: action.payload }
             
             break;
         case 'SingleItemPageObj':

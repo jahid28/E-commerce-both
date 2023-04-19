@@ -25,38 +25,39 @@ export default function Navbar() {
 
 
   async function searchSubmit(e) {
-    setProgress(30)
+    // setProgress(30)
     e.preventDefault();
-    try {
-      if (query.length == 0) {
-        toast.error("Search cannot be empty")
-      }
-      else {
-
-
-
-        await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
-          query
-        })
-          .then(res => {
-            searchQuery(res.data)
-            setProgress(70)
-            navigate("/searchpage")
-          })
-          .catch(e => {
-            toast.error("Something went wrong!");
-
-          })
-      }
-
-
+    // try {
+    if (query.length == 0) {
+      toast.error("Search cannot be empty")
     }
-    catch (e) {
-      toast.error("Something went wrong!");
+    else {
 
+
+
+      // await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
+      //   query
+      // })
+      //   .then(res => {
+      searchQuery(query)
+      setProgress(100)
+
+      navigate("/searchpage")
+      // })
+      // .catch(e => {
+      //   toast.error("Something went wrong!");
+
+      // })
     }
 
-    setProgress(100)
+
+    // }
+    // catch (e) {
+    //   toast.error("Something went wrong!");
+
+    // }
+
+    // setProgress(100)
 
   }
 
@@ -110,29 +111,29 @@ export default function Navbar() {
       let query = event.results[0][0].transcript;
 
       setQuery(query)
-      await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
-        query
-      })
-        .then(res => {
-          searchQuery(res.data)
-          setMicState(false)
-          setProgress(70)
-          navigate("/searchpage")
-        })
-        .catch(e => {
-          toast.error("Something went wrong!");
-
-        })
+      // await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
+      //   query
+      // })
+      //   .then(res => {
+      searchQuery(query)
+      //     setMicState(false)
       setProgress(100)
+      navigate("/searchpage")
+      //   })
+      //   .catch(e => {
+      //     toast.error("Something went wrong!");
+
+      //   })
+      // setProgress(100)
 
 
     };
 
 
-    
+
   }
 
- 
+
 
   return (
     <div className='sticky top-0 z-50'>
@@ -141,7 +142,7 @@ export default function Navbar() {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
-      
+
       <header className="bg-slate-600 md:flex md:justify-between md:items-center md:px-4 md:py-0">
         <div className="flex items-center justify-between px-4 py-1 md:p-0">
           <div className=' w-11'>
@@ -178,7 +179,7 @@ export default function Navbar() {
 
 
 
-   <Link className='block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700 md:ml-4' to={"/login"}>Account/Login </Link> 
+          <Link className='block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700 md:ml-4' to={"/login"}>Account/Login </Link>
           <a className='cursor-pointer block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700 md:ml-4' onClick={goToOrders}>Orders </a>
           <a className='cursor-pointer block w-fit px-2 py-1 text-white font-semibold rounded hover:bg-gray-700  md:ml-4' onClick={goToCart} ><i className="fa-solid fa-cart-shopping "></i> </a>
 

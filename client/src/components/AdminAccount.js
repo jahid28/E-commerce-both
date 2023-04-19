@@ -97,6 +97,7 @@ export default function AdminAccount() {
     newMessages.splice(index, 1);
     setMessages(newMessages);
   };
+
   const logOut = () => {
     setProgress(100)
     Cookies.remove('email')
@@ -113,7 +114,6 @@ export default function AdminAccount() {
       />
 
       <h1 className='text-3xl text-center mt-6'>Admin Account</h1>
-
 
       <form method='/adminUpdate' action="POST" onSubmit={submit}  >
         <section className="text-gray-600  mt-6 body-font grid place-items-center  relative  ">

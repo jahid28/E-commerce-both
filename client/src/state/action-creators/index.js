@@ -1,21 +1,21 @@
-export const decCounter=(counter)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'decrease',
-            payload:counter
-        })
-    }
-}
+// export const decCounter=(counter)=>{
+//     return (dispatch)=>{
+//         dispatch({
+//             type:'decrease',
+//             payload:counter
+//         })
+//     }
+// }
 
 
-export const incCounter=(counter)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'increase',
-            payload:counter
-        })
-    }
-}
+// export const incCounter=(counter)=>{
+//     return (dispatch)=>{
+//         dispatch({
+//             type:'increase',
+//             payload:counter
+//         })
+//     }
+// }
 
 export const searchQuery=(counter)=>{
     return (dispatch)=>{

@@ -2,18 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from "axios"
 import Cookies from "js-cookie";
-
 import { ToastContainer, toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/index.js'
-import ReactImageMagnify from 'react-image-magnify';
-// import 'react-image-magnify/dist/styles.css';
-// import 'react-image-magnify/dist/styles.css';
-// import 'node_modules/react-image-magnify/dist/styles.css';
-
-import { Magnifier } from 'react-image-magnifiers';
 
 
 
@@ -21,7 +14,8 @@ export default function SingleItemPage(props) {
 
     const navigate = useNavigate()
     const [progress, setProgress] = useState(0)
-    const { decCounter, incCounter, SmallCartPreviewArr, SmallCartPreviewTotal, isProductFromCart } = bindActionCreators(actionCreators, useDispatch())
+    const [qty, setQty] = useState(1)
+    const { SmallCartPreviewArr, SmallCartPreviewTotal, isProductFromCart } = bindActionCreators(actionCreators, useDispatch())
     const counter = useSelector(state => state.counter)
     const SingleItemPageObj = counter.SingleItemPageObj
 
@@ -46,7 +40,6 @@ export default function SingleItemPage(props) {
         // setProgress(20)
 
         try {
-            let qty = counter.number
             const cookieVal = Cookies.get("email")
             const nameOfProduct = SingleItemPageObj.name
             setProgress(50)
@@ -105,9 +98,9 @@ export default function SingleItemPage(props) {
             navigate('/login')
         }
         else {
-            SmallCartPreviewArr([{ SingleItemPageObj, qty: counter.number }])
+            SmallCartPreviewArr([{ SingleItemPageObj, qty }])
             isProductFromCart(false)
-            SmallCartPreviewTotal(SingleItemPageObj.price * counter.number)
+            SmallCartPreviewTotal(SingleItemPageObj.price * qty)
             navigate("/address")
         }
         setProgress(100)
@@ -184,9 +177,9 @@ export default function SingleItemPage(props) {
 
 
                                 <div className="flex my-2 ">
-                                    <button disabled={counter.number <= 1 ? true : false} onClick={() => { decCounter(1) }} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center inline-flex items-center mx-2  ">-</button>
-                                    <p className='font-sans '>Qty : {counter.number}</p>
-                                    <button disabled={counter.number >= SingleItemPageObj.stocks ? true : false} onClick={() => { incCounter(1) }} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center  items-center mx-2">+</button>
+                                    <button disabled={qty <= 1 ? true : false} onClick={(e) => { setQty(qty-1) }} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center inline-flex items-center mx-2  ">-</button>
+                                    <p className='font-sans '>Qty : {qty}</p>
+                                    <button disabled={qty >= SingleItemPageObj.stocks ? true : false} onClick={(e) => { setQty(qty+1) }} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   text-xl px-2 text-center  items-center mx-2">+</button>
                                 </div>
 
                             </div>
