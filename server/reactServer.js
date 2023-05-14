@@ -75,21 +75,15 @@ app.post("/getProducts", async (req, res) => {
     try {
         const type =req.body.selectedOption
 
-
         if (type == "All") {
 
             const allProductsPromise = await productCollection.find({}).skip(0).limit(12);
             const totalItemsPromise =await  productCollection.find({}).countDocuments();
-            // Promise.all([allProductsPromise, totalItemsPromise]).then(([allProducts, totalItems]) => {
               const data = {
                 allProducts:allProductsPromise,
                 totalItems:totalItemsPromise
               };
-            
                 res.json(data)
-           
-
-
 
         }
         else {
@@ -103,8 +97,6 @@ app.post("/getProducts", async (req, res) => {
               };
               res.json(data)
             
-
-
         }
 
 
@@ -151,19 +143,12 @@ app.post("/search", async (req, res) => {
                 else if (regex.test(type.toLowerCase())) {
                     sum++
                 }
-
-
             }
-
             if (sum == words.length) {
-
                 finalArr.push(e)
-
-
             }
 
         })
-
         res.json(finalArr)
     }
     catch (e) {

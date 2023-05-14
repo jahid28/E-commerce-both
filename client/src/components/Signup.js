@@ -11,39 +11,8 @@ import { useNavigate, Link } from "react-router-dom"
 export default function Signup() {
   const [captchaValue, setCaptchaValue] = useState(null);
 
-  const canvasRef = useRef(null);
-  // const [captchaText, setCaptchaText] = useState('');
-  const [inp, setInp] = useState('');
-
-  // useEffect(() => {
-  //   setCaptchaText(randomstring.generate(6));
-  // }, []);
-
-  // useEffect(() => {
-  //   const canvas = canvasRef.current;
-  //   const ctx = canvas.getContext('2d');
-  //   const fontSize = 35;
-  //   const width = canvas.width;
-  //   const height = canvas.height;
-
-  //   ctx.clearRect(0, 0, width, height);
-
-  //   ctx.font = `${fontSize}px Arial`;
-  //   ctx.fillText(captchaText, 40, 40);
-
-  //   for (let i = 0; i < 5; i++) {
-  //     const startX = Math.random() * width;
-  //     const startY = Math.random() * height;
-  //     const endX = Math.random() * width;
-  //     const endY = Math.random() * height;
-  //     ctx.beginPath();
-  //     ctx.moveTo(startX, startY);
-  //     ctx.lineTo(endX, endY);
-  //     ctx.stroke();
-  //   }
-  // }, [captchaText]);
-
-
+  // const canvasRef = useRef(null);
+  // const [inp, setInp] = useState('');
 
   const history = useNavigate();
 
@@ -82,10 +51,9 @@ export default function Signup() {
             else if (res.data == "notexist") {
 
               Cookies.set("email", formData.email, { expires: 7 })
-              if (Cookies.get("allProducts") != undefined || Cookies.get("allProducts") != null) {
-                Cookies.remove("allProducts")
-              }
-
+              // if (Cookies.get("allProducts") != undefined || Cookies.get("allProducts") != null) {
+              //   Cookies.remove("allProducts")
+              // }
 
               toast.success("Successfully Registered", {
                 autoClose: 1000

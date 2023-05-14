@@ -32,16 +32,6 @@ const initialState = {
 const reducer=(state=initialState,action)=>{
     
     switch (action.type) {
-        // case 'decrease':
-        //     // text: action.payload
-        //     return { ...state, number: state.number - action.payload }
-            
-        //     break;
-
-        // case 'increase':
-        //     return  { ...state, number: state.number + action.payload }
-            
-        //     break;
 
         case 'searchQuery':
             return  { ...state, searchQuery: action.payload }

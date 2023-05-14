@@ -10,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/index.js'
-// import { QrReader } from 'react-qr-reader';
 
 export default function Navbar() {
   let navigate = useNavigate()
@@ -33,32 +32,12 @@ export default function Navbar() {
     }
     else {
 
-
-
-      // await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
-      //   query
-      // })
-      //   .then(res => {
       searchQuery(query)
       setProgress(100)
 
       navigate("/searchpage")
-      // })
-      // .catch(e => {
-      //   toast.error("Something went wrong!");
 
-      // })
     }
-
-
-    // }
-    // catch (e) {
-    //   toast.error("Something went wrong!");
-
-    // }
-
-    // setProgress(100)
-
   }
 
   const [showMenu, setShowMenu] = useState(false);
@@ -111,25 +90,12 @@ export default function Navbar() {
       let query = event.results[0][0].transcript;
 
       setQuery(query)
-      // await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, {
-      //   query
-      // })
-      //   .then(res => {
       searchQuery(query)
-      //     setMicState(false)
       setProgress(100)
       navigate("/searchpage")
-      //   })
-      //   .catch(e => {
-      //     toast.error("Something went wrong!");
-
-      //   })
-      // setProgress(100)
 
 
     };
-
-
 
   }
 
