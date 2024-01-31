@@ -33,11 +33,7 @@ export default function SingleItemPage(props) {
 
 
     const addToCart = async (e) => {
-        // if (SingleItemPageObj.stocks == 0) {
-        //     toast.warn("Product is out of stock")
-        //     return
-        // }
-        // setProgress(20)
+       
 
         try {
             const cookieVal = Cookies.get("email")

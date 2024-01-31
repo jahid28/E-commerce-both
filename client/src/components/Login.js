@@ -66,7 +66,6 @@ export default function Login() {
       
       <form method='/login' action="POST" onSubmit={submit} >
         <section className="text-gray-600 mt-14 body-font grid place-items-center  relative  ">
-
           <div className="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col   mt-10 md:mt-0 relative z-10 shadow-md">
             <h2 className="text-gray-900 text-2xl mb-5 font-medium title-font">Login</h2>
 
