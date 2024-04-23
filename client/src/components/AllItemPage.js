@@ -84,10 +84,10 @@ export default function AllItemPage(props) {
     setLoading(true);
 
     try {
-        if(pageNum<1){
-            toast.error("Somethig went wrong!");
-            return
-        }
+        // if(pageNum<1){
+        //     toast.error("Somethig went wrong!");
+        //     return
+        // }
       // console.log("num is ", pageNum);
       // navigate(`/?selectedOption=${selectedOption}&pageNum=${pageNum}`);
 
