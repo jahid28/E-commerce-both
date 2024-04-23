@@ -27,9 +27,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(cors({
-  origin: 'https://twd-store.vercel.app/'
-}));
+// app.use(cors({
+//   origin: 'https://twd-store.vercel.app/'
+// }));
 
 async function hashPass(password) {
   const res = await bcryptjs.hash(password, 10);
