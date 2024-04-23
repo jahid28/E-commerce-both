@@ -9,11 +9,12 @@
     "js-cookie": "^3.0.1",
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.1",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "url": "^0.11.3"
   },
   "scripts": {
     "start": "node reactServer.js",
     "build": "npm i",
-    "dev":"nodemon reactServer.js"
+    "dev": "nodemon reactServer.js"
   }
 }

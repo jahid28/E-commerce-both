@@ -9,6 +9,9 @@ import { actionCreators } from '../state/index.js'
 import Cookies from 'js-cookie';
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
 
 
 const PaymentForm = () => {
