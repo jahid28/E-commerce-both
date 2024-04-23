@@ -114,7 +114,7 @@ export default function AllItemPage(props) {
           toast.error("Somethig went wrong!");
         });
     } catch (e) {
-      console.log("howww", e);
+      // console.log("howww", e);
       toast.error("Somethig went wrong!");
     }
   };
