@@ -53,7 +53,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/singleorderpage" element={<SingleOrderPage />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/allitempage" element={<AllItemPage />} />
+          {/* <Route path="/allitempage?page=1" element={<AllItemPage />} /> */}
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/singleitempage" element={<SingleItemPage />} />
           <Route path="/contact" element={<Contact />} />
