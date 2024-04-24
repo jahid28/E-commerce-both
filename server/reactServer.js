@@ -25,11 +25,13 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(cors());
 
-// app.use(cors({
-//   origin: 'https://twd-store.vercel.app/'
-// }));
+app.use(cors({
+  origin: ["https://twd-store.vercel.app/"],
+  methods:["GET","POST","POST","DELETE"],
+  credentials:true
+}));
 
 async function hashPass(password) {
   const res = await bcryptjs.hash(password, 10);
