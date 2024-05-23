@@ -55,7 +55,7 @@ export default function Footer() {
             <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
               <img className="h-8 md:h-20  md:mt-1 md:mb-1" src={require('./Images/twd_ecommerce-removebg-preview (3).png')} alt="" />
             </a>
-            <p class="text-sm text-white sm:ml-6 sm:mt-0 mt-4">© 2023 TWD Ecommerce
+            <p class="text-sm text-white sm:ml-6 sm:mt-0 mt-4">© 2024 TWD Ecommerce
             </p>
 
           </div>
