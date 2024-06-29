@@ -147,11 +147,11 @@ export default function AllItemPage(props) {
         onChange={typeChange}
       >
         <option>All</option>
-        <option>Electronics</option>
-        <option>Fashion</option>
-        <option>Toys</option>
-        <option>Sports</option>
-        <option>Kitchen</option>
+        <option>Neck-sets</option>
+        <option>Earrings</option>
+        <option>Bangles-Bracelets</option>
+        <option>Bridal collection</option>
+        {/* <option>Kitchen</option> */}
       </select>
 
       <section className="text-gray-600 body-font ">

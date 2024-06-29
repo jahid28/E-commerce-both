@@ -11,7 +11,7 @@ export default function Address() {
     const navigate = useNavigate()
     const { paymentDetails } = bindActionCreators(actionCreators, useDispatch())
     
-    const [captchaValue, setCaptchaValue] = useState(null);
+    // const [captchaValue, setCaptchaValue] = useState(null);
     const [formData, setFormData] = useState({
         phone: '',
         address: '',
@@ -52,11 +52,11 @@ export default function Address() {
 
     const submit = (e) => {
         e.preventDefault();
-        if (!captchaValue) {
-            toast.error("Fill the Captcha")
+        // if (!captchaValue) {
+        //     toast.error("Fill the Captcha")
 
-        }
-        else if (formData.phone.length != 10) {
+        // }
+         if (formData.phone.length != 10) {
             toast.error("Phone number should be 10 digits long")
         }
         else if (formData.pincode.length != 6 || state.length == 0 || district.length == 0) {
@@ -105,10 +105,10 @@ export default function Address() {
 
 
 
-                    <ReCAPTCHA
+                    {/*<ReCAPTCHA
                         sitekey={`${process.env.REACT_APP_RECAPTCHA}`}
                         onChange={(value) => setCaptchaValue(value)}
-                    />
+                    />*/}
 
                     <input type="submit" className="mt-3 cursor-pointer text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" value="Submit" />
                 </div>

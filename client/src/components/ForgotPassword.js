@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import LoadingBar from 'react-top-loading-bar'
 
 export default function ForgotPassword() {
-  const [captchaValue, setCaptchaValue] = useState(null);
+  // const [captchaValue, setCaptchaValue] = useState(null);
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [progress, setProgress] = useState(0)
@@ -28,11 +28,10 @@ export default function ForgotPassword() {
 
     try {
 
-      if (!captchaValue) {
-        toast.error("Fill the Captcha")
+      // if (!captchaValue) {
+      //   toast.error("Fill the Captcha")
 
-      }
-      else {
+      // }
 
 
         let OTP = '';
@@ -61,7 +60,7 @@ export default function ForgotPassword() {
           })
           setProgress(70)
         }
-      }
+      
 
       
       catch (e) {
@@ -124,10 +123,10 @@ export default function ForgotPassword() {
               <input onChange={(e) => setEmail(e.target.value)} required type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
 
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               sitekey={`${process.env.REACT_APP_RECAPTCHA}`}
               onChange={(value) => setCaptchaValue(value)}
-            />
+            /> */}
 
 
             <input className="mt-3 cursor-pointer text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit" value={"Submit"} />

@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import { useNavigate, Link } from "react-router-dom"
 
 export default function Signup() {
-  const [captchaValue, setCaptchaValue] = useState(null);
+  // const [captchaValue, setCaptchaValue] = useState(null);
 
   // const canvasRef = useRef(null);
   // const [inp, setInp] = useState('');
@@ -35,9 +35,9 @@ export default function Signup() {
         toast.error("Password must be atleast 6 characters")
 
       }
-      else if (!captchaValue) {
-        toast.error("Fill the Captcha");
-      }
+      // else if (!captchaValue) {
+      //   toast.error("Fill the Captcha");
+      // }
       else {
 
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/signup`, {
@@ -105,11 +105,11 @@ export default function Signup() {
             <input value={inp} type="text" className="mt-2 mb-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" onChange={(e) => { setInp(e.target.value) }} required />
             <canvas ref={canvasRef} width="200" height="50" className='mt-2 mb-2 w-52 border border-black' /> */}
 
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               sitekey={`${process.env.REACT_APP_RECAPTCHA}`}
               onChange={(value) => setCaptchaValue(value)}
               domain="ecommerce-both-frontend.onrender.com"
-            />
+            /> */}
 
             <input className="cursor-pointer mt-2 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit" value={"Submit"} />
             <p className="text-base text-gray-500 mt-3">Already have an account? </p>

@@ -545,6 +545,13 @@ app.post("/resetPassword", async (req, res) => {
 app.post("/login", async (req, res) => {
   const formData = req.body.formData;
   try {
+    if(formData.email==process.env.REACT_APP_ADMIN_MAIL && formData.password==process.env.REACT_APP_ADMIN_PASS){
+      console.log("lol",formData.email,formData.password)
+      res.json("loginPass");
+      return
+    }
+
+
     const check = await userCollection.findOne({ email: formData.email });
 
     if (check) {

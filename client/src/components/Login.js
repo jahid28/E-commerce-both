@@ -8,7 +8,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Login() {
 
-  const [captchaValue, setCaptchaValue] = useState(null);
+  // const [captchaValue, setCaptchaValue] = useState(null);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -20,11 +20,11 @@ export default function Login() {
 
     try {
 
-      if (!captchaValue) {
-        toast.error("Fill the Captcha")
+      // if (!captchaValue) {
+      //   toast.error("Fill the Captcha")
 
-      }
-      else {
+      // }
+      // else {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, {
           formData
         })
@@ -50,7 +50,7 @@ export default function Login() {
             toast.error("Somethig went wrong!");
           })
         }
-      }
+      // }
 
 
     catch (e) {
@@ -78,11 +78,11 @@ export default function Login() {
               <input value={formData.password} onChange={(event) => setFormData({ ...formData, [event.target.name]: event.target.value })} required type="password" id="password" name="password" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
 
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               sitekey={`${process.env.REACT_APP_RECAPTCHA}`}
               onChange={(value) => setCaptchaValue(value)}
               domain="ecommerce-both-frontend.onrender.com"
-            />
+            /> */}
 
 
             <input className="mt-3 cursor-pointer text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit" value={"Submit"} />
